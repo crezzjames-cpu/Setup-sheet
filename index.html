@@ -484,12 +484,12 @@
                 <input type="text" id="pin" placeholder="Device PIN" autocomplete="new-password">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="imei-group" style="display: none;">
                 <label for="imei">IMEI number (Trade in)</label>
                 <input type="text" id="imei" placeholder="Enter IMEI number" autocomplete="off">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="preorder-group" style="display: none;">
                 <label for="preorder">Pre-order</label>
                 <select id="preorder">
                     <option value="">-- Select --</option>
@@ -632,11 +632,22 @@
             const deviceSelect = document.getElementById('device');
             const iconContainer = document.getElementById('icon-container');
             const promoBanner = document.getElementById('promo-banner');
+            const imeiGroup = document.getElementById('imei-group');
+            const preorderGroup = document.getElementById('preorder-group');
             const selectedDevice = deviceSelect.value;
             
             iconContainer.innerHTML = icons[selectedDevice];
             updateZaggDropdown(selectedDevice);
             updateOfficeVisibility(selectedDevice);
+
+            // Show IMEI and Pre-order only on Mobile phone tab
+            if (selectedDevice === 'mobile') {
+                imeiGroup.style.display = 'flex';
+                preorderGroup.style.display = 'flex';
+            } else {
+                imeiGroup.style.display = 'none';
+                preorderGroup.style.display = 'none';
+            }
 
             const cards = [
                 document.getElementById('antivirus-card'),
