@@ -234,13 +234,23 @@
             background-color: var(--light-purple);
             border: 2px solid var(--main-purple);
             border-radius: 8px;
-            padding: 12px;
+            padding: 10px 12px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             justify-content: center;
             align-items: center;
             text-align: center;
+        }
+
+        /* Pen Tick Square */
+        .pen-tick-box {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--main-purple);
+            border-radius: 3px;
+            background-color: var(--white);
+            flex-shrink: 0;
         }
 
         .service-card label {
@@ -260,14 +270,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
             text-align: center;
         }
 
         .service-card.checkbox-card input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             accent-color: var(--main-purple);
             cursor: pointer;
             margin: 0;
@@ -438,6 +448,14 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
+            .pen-tick-box {
+                width: 12px !important;
+                height: 12px !important;
+                border: 1.5px solid var(--main-purple) !important;
+                background-color: var(--white) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
             .service-card label, .service-card span {
                 font-size: 10.5px !important;
             }
@@ -577,36 +595,43 @@
         
         <div class="services-grid" id="services-grid">
             <div class="service-card" id="antivirus-card">
+                <div class="pen-tick-box"></div>
                 <label for="antivirus">Anti-virus</label>
                 <select id="antivirus"></select>
             </div>
 
             <div class="service-card" id="office-card">
+                <div class="pen-tick-box"></div>
                 <label for="office">Office</label>
                 <select id="office"></select>
             </div>
 
             <div class="service-card" id="privacy-card">
+                <div class="pen-tick-box"></div>
                 <label for="privacyGuard">Privacy Guard</label>
                 <select id="privacyGuard"></select>
             </div>
 
             <div class="service-card" id="zagg-card">
+                <div class="pen-tick-box"></div>
                 <label for="zagg">Zagg Screen Protector</label>
                 <select id="zagg"></select>
             </div>
 
             <label class="service-card checkbox-card" id="cloud-card">
+                <div class="pen-tick-box"></div>
                 <span>Cloud Storage</span>
                 <input type="checkbox" id="cloudCheck"> 
             </label>
 
             <label class="service-card checkbox-card" id="vpn-card">
+                <div class="pen-tick-box"></div>
                 <span>VPN Service</span>
                 <input type="checkbox" id="vpnCheck"> 
             </label>
 
             <label class="service-card checkbox-card" id="data-card">
+                <div class="pen-tick-box"></div>
                 <span>Data Transfer</span>
                 <input type="checkbox" id="dataCheck"> 
             </label>
