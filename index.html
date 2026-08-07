@@ -96,7 +96,7 @@
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             border-bottom: 3px solid var(--main-purple);
             padding-bottom: 10px;
             margin-bottom: 15px;
@@ -110,6 +110,42 @@
             letter-spacing: 1px;
         }
 
+        .header-center {
+            flex: 1;
+            max-width: 280px;
+            margin: 0 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .header-center label {
+            color: var(--label-purple);
+            font-weight: bold;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .header-center input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 2px solid #d8b4fe;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: bold;
+            box-sizing: border-box;
+            color: #333;
+            background-color: var(--white);
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .header-center input:focus {
+            outline: none;
+            border-color: var(--main-purple);
+            background-color: var(--light-purple);
+        }
+
         /* Device Icon Container */
         .device-icon-container {
             width: 60px;
@@ -117,6 +153,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;
         }
 
         /* Form Grid Layout */
@@ -146,7 +183,6 @@
 
         input[type="text"],
         input[type="email"],
-        input[type="date"],
         select,
         textarea {
             width: 100%;
@@ -280,6 +316,16 @@
                 width: 100%;
                 justify-content: center;
             }
+            .header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            .header-center {
+                max-width: 100%;
+                margin: 0;
+                width: 100%;
+            }
             .form-grid {
                 grid-template-columns: 1fr;
             }
@@ -303,7 +349,7 @@
             }
         }
 
-        /* Print Settings - Balanced spacing with 20-line notes fitting single-page A4 */
+        /* Print Settings - Strictly optimized to fit one single A4 page */
         @page {
             size: A4;
             margin: 0;
@@ -321,7 +367,7 @@
             }
             .a4-sheet {
                 box-shadow: none;
-                padding: 8mm 12mm !important;
+                padding: 6mm 10mm !important;
                 width: 210mm !important;
                 height: 297mm !important;
                 max-height: 297mm !important;
@@ -331,71 +377,84 @@
                 margin: 0;
             }
             .header {
-                padding-bottom: 4px !important;
-                margin-bottom: 8px !important;
+                padding-bottom: 2mm !important;
+                margin-bottom: 4mm !important;
+                align-items: center !important;
             }
             .header h1 {
-                font-size: 24px !important;
+                font-size: 22px !important;
+            }
+            .header-center {
+                max-width: 160px !important;
+                margin: 0 8px !important;
+            }
+            .header-center label {
+                font-size: 10px !important;
+            }
+            .header-center input {
+                padding: 2px 5px !important;
+                font-size: 13px !important;
+                font-weight: bold !important;
+                border: 2px solid var(--main-purple) !important;
             }
             .form-grid {
-                gap: 5px 12px !important;
-                margin-bottom: 8px !important;
+                gap: 3px 10px !important;
+                margin-bottom: 5mm !important;
             }
             label {
-                font-size: 11.5px !important;
+                font-size: 10.5px !important;
             }
             input[type="text"],
             input[type="email"],
-            input[type="date"],
             select,
             textarea {
-                padding: 3.5px 7px !important;
-                font-size: 12px !important;
+                padding: 2.5px 5px !important;
+                font-size: 11px !important;
                 border: 2px solid var(--main-purple) !important;
             }
             .section-title {
-                font-size: 13.5px !important;
-                margin: 0 0 5px 0 !important;
-                padding-bottom: 2px !important;
+                font-size: 12px !important;
+                margin: 0 0 3px 0 !important;
+                padding-bottom: 1px !important;
             }
             .services-grid {
-                gap: 8px !important;
-                margin-bottom: 8px !important;
+                gap: 5px !important;
+                margin-bottom: 5mm !important;
             }
             .service-card {
-                padding: 5px !important;
-                gap: 3px !important;
+                padding: 3px !important;
+                gap: 2px !important;
                 border: 2px solid var(--main-purple) !important;
                 background-color: var(--light-purple) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             .service-card label, .service-card span {
-                font-size: 11.5px !important;
+                font-size: 10.5px !important;
             }
             .service-card select {
-                padding: 2.5px !important;
-                font-size: 11.5px !important;
+                padding: 1.5px !important;
+                font-size: 10.5px !important;
             }
             .service-card.checkbox-card input[type="checkbox"] {
-                width: 13px;
-                height: 13px;
+                width: 12px;
+                height: 12px;
             }
             .promo-banner {
-                padding: 3px 6px !important;
-                font-size: 10px !important;
-                margin-bottom: 3px !important;
+                padding: 2px 5px !important;
+                font-size: 9.5px !important;
+                margin-bottom: 2px !important;
                 border: 1.5px dashed var(--main-purple) !important;
                 background-color: var(--light-purple) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             textarea#notes {
-                height: 275px !important; /* Explicitly sized to fit 20 lines perfectly */
+                height: 160px !important;
             }
             svg {
-                width: 42px !important;
-                height: 42px !important;
+                width: 36px !important;
+                height: 36px !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -420,6 +479,10 @@
                 <h1>Setup Sheet</h1>
                 <p style="color: var(--main-purple); margin: 3px 0 0 0; font-weight: bold; font-size: 13px;">Device Configuration & Services</p>
             </div>
+            <div class="header-center">
+                <label for="customerName">Customer Name</label>
+                <input type="text" id="customerName" placeholder="Enter full name" autocomplete="off">
+            </div>
             <div class="device-icon-container" id="icon-container"></div>
         </header>
 
@@ -427,7 +490,7 @@
             <div class="form-group">
                 <label for="device">Device Type</label>
                 <select id="device" onchange="handleDeviceChange()">
-                    <option value="none">-- Select Device --</option>
+                    <option value="none">-- Select --</option>
                     <option value="laptop">Laptop</option>
                     <option value="aio">All in one</option>
                     <option value="tower">Tower</option>
@@ -437,23 +500,33 @@
             </div>
 
             <div class="form-group">
-                <label for="productCode">Item & Product Code</label>
-                <input type="text" id="productCode" placeholder="e.g. LAP123-45678" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label for="customerName">Customer Name</label>
-                <input type="text" id="customerName" placeholder="Enter full name" autocomplete="off">
-            </div>
-
-            <div class="form-group">
                 <label for="colleagueName">You were served by</label>
                 <input type="text" id="colleagueName" placeholder="First Name" autocomplete="off">
             </div>
 
             <div class="form-group">
+                <label for="item">Item</label>
+                <input type="text" id="item" placeholder="Enter item" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="productCode">Product Code</label>
+                <input type="text" id="productCode" placeholder="e.g. LAP123" autocomplete="off">
+            </div>
+
+            <div class="form-group">
                 <label for="categoryType">Receipt / CUR / Medics</label>
                 <input type="text" id="categoryType" placeholder="Enter Receipt / CUR / Medics" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth <span style="font-weight: normal; font-size: 0.9em;">(only needed for new account creation)</span></label>
+                <input type="text" id="dob" placeholder="DD/MM/YYYY" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="contactNumber">Best Contact Number</label>
+                <input type="text" id="contactNumber" placeholder="Enter phone number" autocomplete="off">
             </div>
 
             <div class="form-group">
@@ -464,16 +537,6 @@
             <div class="form-group full-width">
                 <label for="address">Full Address</label>
                 <textarea id="address" rows="2" placeholder="Enter customer's full address" autocomplete="off"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label for="contactNumber">Best Contact Number</label>
-                <input type="text" id="contactNumber" placeholder="Enter phone number" autocomplete="off">
             </div>
 
             <div class="form-group">
@@ -714,7 +777,7 @@
             }
         }
 
-        const fields = ['device', 'productCode', 'customerName', 'colleagueName', 'categoryType', 'email', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
+        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'categoryType', 'email', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
 
         function clearAppData() {
             if (confirm("Are you sure you want to clear all form fields?")) {
