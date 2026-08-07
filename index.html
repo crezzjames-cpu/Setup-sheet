@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setup Sheet App</title>
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4b0082">
     <style>
         :root {
             --main-purple: #9b51e0;
@@ -362,7 +365,7 @@
             <div class="device-icon-container" id="icon-container"></div>
         </header>
 
-        <form class="form-grid" id="setup-form">
+        <form class="form-grid" id="setup-form" autocomplete="off">
             <div class="form-group">
                 <label for="device">Device Type</label>
                 <select id="device" onchange="handleDeviceChange()">
@@ -377,17 +380,17 @@
 
             <div class="form-group">
                 <label for="productCode">Item & Product Code</label>
-                <input type="text" id="productCode" placeholder="e.g. LAP123-45678">
+                <input type="text" id="productCode" placeholder="e.g. LAP123-45678" autocomplete="off">
             </div>
 
             <div class="form-group">
                 <label for="customerName">Customer Name</label>
-                <input type="text" id="customerName" placeholder="Enter full name">
+                <input type="text" id="customerName" placeholder="Enter full name" autocomplete="off">
             </div>
 
             <div class="form-group">
                 <label for="colleagueName">You were served by</label>
-                <input type="text" id="colleagueName" placeholder="First Name">
+                <input type="text" id="colleagueName" placeholder="First Name" autocomplete="off">
             </div>
 
             <div class="form-group full-width">
@@ -402,32 +405,32 @@
 
             <div class="form-group full-width">
                 <label for="address">Full Address</label>
-                <textarea id="address" rows="2" placeholder="Enter customer's full address"></textarea>
+                <textarea id="address" rows="2" placeholder="Enter customer's full address" autocomplete="off"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="dob">Date of Birth</label>
-                <input type="date" id="dob">
+                <input type="date" id="dob" autocomplete="off">
             </div>
 
             <div class="form-group">
                 <label for="contactNumber">Best Contact Number</label>
-                <input type="text" id="contactNumber" placeholder="Enter phone number">
+                <input type="text" id="contactNumber" placeholder="Enter phone number" autocomplete="off">
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" id="password" placeholder="Account Password">
+                <input type="text" id="password" placeholder="Account Password" autocomplete="new-password">
             </div>
 
             <div class="form-group">
                 <label for="pin">Pin</label>
-                <input type="text" id="pin" placeholder="Device PIN">
+                <input type="text" id="pin" placeholder="Device PIN" autocomplete="new-password">
             </div>
 
             <div class="form-group">
                 <label for="imei">IMEI number (Trade in)</label>
-                <input type="text" id="imei" placeholder="Enter IMEI number">
+                <input type="text" id="imei" placeholder="Enter IMEI number" autocomplete="off">
             </div>
 
             <div class="form-group">
@@ -482,7 +485,7 @@
         <div class="notes-section">
             <h3 class="section-title" style="margin-bottom: 10px;">Additional Notes</h3>
             <div id="promo-banner" class="promo-banner"></div>
-            <textarea id="notes" rows="8" placeholder="Enter setup notes, specific customer requests, or additional information here..."></textarea>
+            <textarea id="notes" rows="8" placeholder="Enter setup notes, specific customer requests, or additional information here..." autocomplete="off"></textarea>
         </div>
 
     </div>
@@ -661,8 +664,19 @@
             }
         }
 
-        // Initialize on page load
+        // Initialize on page load and clear form data on browser refresh/page show for privacy
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                clearAppData();
+            }
+        });
+
         handleDeviceChange();
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log('ServiceWorker registration failed: ', err));
+        }
     </script>
 </body>
 </html>
