@@ -98,40 +98,40 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 3px solid var(--main-purple);
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             margin-bottom: 15px;
         }
 
         .header h1 {
             color: var(--main-purple);
             margin: 0;
-            font-size: 32px;
+            font-size: 46px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .header-center {
             flex: 1;
-            max-width: 280px;
+            max-width: 380px;
             margin: 0 15px;
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 4px;
         }
 
         .header-center label {
             color: var(--label-purple);
             font-weight: bold;
-            font-size: 12px;
+            font-size: 14px;
             margin: 0;
         }
 
         .header-center input {
             width: 100%;
-            padding: 6px 10px;
+            padding: 8px 12px;
             border: 2px solid #d8b4fe;
             border-radius: 6px;
-            font-size: 20px;
+            font-size: 40px;
             font-weight: bold;
             box-sizing: border-box;
             color: #333;
@@ -148,12 +148,17 @@
 
         /* Device Icon Container */
         .device-icon-container {
-            width: 60px;
-            height: 60px;
+            width: 85px;
+            height: 85px;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-shrink: 0;
+        }
+
+        .device-icon-container svg {
+            width: 100%;
+            height: 100%;
         }
 
         /* Form Grid Layout */
@@ -382,20 +387,24 @@
                 align-items: center !important;
             }
             .header h1 {
-                font-size: 22px !important;
+                font-size: 28px !important;
             }
             .header-center {
-                max-width: 160px !important;
+                max-width: 200px !important;
                 margin: 0 8px !important;
             }
             .header-center label {
                 font-size: 10px !important;
             }
             .header-center input {
-                padding: 2px 5px !important;
-                font-size: 13px !important;
+                padding: 3px 6px !important;
+                font-size: 28px !important;
                 font-weight: bold !important;
                 border: 2px solid var(--main-purple) !important;
+            }
+            .device-icon-container {
+                width: 65px !important;
+                height: 65px !important;
             }
             .form-grid {
                 gap: 3px 10px !important;
@@ -453,8 +462,8 @@
                 height: 160px !important;
             }
             svg {
-                width: 36px !important;
-                height: 36px !important;
+                width: 60px !important;
+                height: 60px !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
