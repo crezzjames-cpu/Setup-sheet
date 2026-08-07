@@ -145,6 +145,7 @@
         }
 
         input[type="text"],
+        input[type="email"],
         input[type="date"],
         select,
         textarea {
@@ -344,6 +345,7 @@
                 font-size: 11.5px !important;
             }
             input[type="text"],
+            input[type="email"],
             input[type="date"],
             select,
             textarea {
@@ -449,9 +451,14 @@
                 <input type="text" id="colleagueName" placeholder="First Name" autocomplete="off">
             </div>
 
-            <div class="form-group full-width">
+            <div class="form-group">
                 <label for="categoryType">Receipt / CUR / Medics</label>
                 <input type="text" id="categoryType" placeholder="Enter Receipt / CUR / Medics" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter email address" autocomplete="email">
             </div>
 
             <div class="form-group full-width">
@@ -707,7 +714,7 @@
             }
         }
 
-        const fields = ['device', 'productCode', 'customerName', 'colleagueName', 'categoryType', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
+        const fields = ['device', 'productCode', 'customerName', 'colleagueName', 'categoryType', 'email', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
 
         function clearAppData() {
             if (confirm("Are you sure you want to clear all form fields?")) {
