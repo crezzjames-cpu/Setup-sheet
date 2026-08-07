@@ -318,9 +318,6 @@
             .app-toolbar {
                 display: none !important;
             }
-            .lookup-container {
-                display: none !important; /* Hide postcode search input & button when printing */
-            }
             .a4-sheet {
                 box-shadow: none;
                 padding: 8mm 12mm !important;
@@ -454,24 +451,12 @@
 
             <div class="form-group full-width">
                 <label for="categoryType">Receipt / CUR / Medics</label>
-                <select id="categoryType">
-                    <option value="">-- Select Type --</option>
-                    <option value="receipt">Receipt</option>
-                    <option value="cur">CUR</option>
-                    <option value="medics">Medics</option>
-                </select>
+                <input type="text" id="categoryType" placeholder="Enter Receipt / CUR / Medics" autocomplete="off">
             </div>
 
             <div class="form-group full-width">
-                <label for="address">Full Address & Postcode Lookup</label>
-                <div class="lookup-container" style="display: flex; gap: 8px; margin-bottom: 6px;">
-                    <input type="text" id="postcodeSearch" placeholder="Enter Postcode (e.g. CW1 2AA)" autocomplete="off" style="flex: 1;" onkeydown="if(event.key === 'Enter'){event.preventDefault(); searchPostcode();}">
-                    <button type="button" class="app-btn" style="padding: 6px 12px; font-size: 13px;" onclick="searchPostcode()">🔍 Find Address</button>
-                </div>
-                <select id="addressDropdown" class="lookup-container" style="display: none; margin-bottom: 6px;" onchange="selectAddress(this)">
-                    <option value="">-- Select address from list --</option>
-                </select>
-                <textarea id="address" rows="2" placeholder="Customer full address (auto-filled or type manually)" autocomplete="off"></textarea>
+                <label for="address">Full Address</label>
+                <textarea id="address" rows="2" placeholder="Enter customer's full address" autocomplete="off"></textarea>
             </div>
 
             <div class="form-group">
@@ -638,52 +623,6 @@
             tablet: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="15" y="10" width="70" height="80" rx="6" /><circle cx="50" cy="80" r="4" /></svg>`
         };
 
-        async function searchPostcode() {
-            const postcode = document.getElementById('postcodeSearch').value.trim();
-            const dropdown = document.getElementById('addressDropdown');
-            
-            if (!postcode) {
-                alert('Please enter a valid postcode first.');
-                return;
-            }
-
-            const cleanPostcode = postcode.replace(/\s+/g, '').toUpperCase();
-            const targetUrl = `https://api.homedata.co.uk/address/postcode/${cleanPostcode}/`;
-            const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
-            
-            try {
-                const response = await fetch(proxyUrl);
-                if (!response.ok) {
-                    throw new Error('Postcode lookup failed');
-                }
-                const data = await response.json();
-                
-                if (data && data.addresses && data.addresses.length > 0) {
-                    dropdown.innerHTML = '<option value="">-- Select address from list (' + data.addresses.length + ' found) --</option>';
-                    data.addresses.forEach(item => {
-                        const opt = document.createElement('option');
-                        opt.value = item.address;
-                        opt.textContent = item.address;
-                        dropdown.appendChild(opt);
-                    });
-                    dropdown.style.display = 'block';
-                } else {
-                    alert('No addresses found for this postcode. Please type the address manually.');
-                    dropdown.style.display = 'none';
-                }
-            } catch (err) {
-                console.error(err);
-                alert('Could not fetch addresses automatically. Please type the address manually below.');
-                dropdown.style.display = 'none';
-            }
-        }
-
-        function selectAddress(selectEl) {
-            if (selectEl.value) {
-                document.getElementById('address').value = selectEl.value;
-            }
-        }
-
         function handleDeviceChange() {
             const deviceSelect = document.getElementById('device');
             const iconContainer = document.getElementById('icon-container');
@@ -768,7 +707,7 @@
             }
         }
 
-        const fields = ['device', 'productCode', 'customerName', 'colleagueName', 'categoryType', 'postcodeSearch', 'addressDropdown', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
+        const fields = ['device', 'productCode', 'customerName', 'colleagueName', 'categoryType', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
 
         function clearAppData() {
             if (confirm("Are you sure you want to clear all form fields?")) {
@@ -782,7 +721,6 @@
                         }
                     }
                 });
-                document.getElementById('addressDropdown').style.display = 'none';
                 handleDeviceChange();
             }
         }
