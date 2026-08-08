@@ -664,6 +664,11 @@
                 <input type="email" id="email" placeholder="Enter email address" autocomplete="email">
             </div>
 
+            <div class="form-group">
+                <label for="altEmail">Alternative Email Address</label>
+                <input type="email" id="altEmail" placeholder="Enter alternative email address" autocomplete="email">
+            </div>
+
             <div class="form-group full-width">
                 <label for="address">Full Address</label>
                 <textarea id="address" rows="2" placeholder="Enter customer's full address" autocomplete="off"></textarea>
@@ -960,7 +965,7 @@
             }
         }
 
-        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'categoryType', 'email', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
+        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'categoryType', 'email', 'altEmail', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
 
         function clearAppData() {
             if (confirm("Are you sure you want to clear all form fields?")) {
