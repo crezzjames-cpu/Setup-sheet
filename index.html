@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setup Sheet App</title>
-    <!-- PWA Manifest Link -->
-    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4b0082">
     <style>
         :root {
@@ -952,7 +950,6 @@
                         <div class="tip-item">Internet running slow at home or possibly over paying speak to an advisor to help find the best deal for you !!!</div>
                     `;
 
-                    // Add the extra text exclusively for tablets
                     if (selectedDevice === 'tablet') {
                         tipsHtml += `
                             <div class="tip-item"><strong>Did you know you can check if your over paying on your mobile phone contract</strong><br><br>Texting the word INFO to 85075 is a free UK mobile service that tells you whether you are still in a minimum-term contract with your mobile provider and if you owe any early termination fees. Speak to one of our advisors today about beating your price !!!!</div>
@@ -988,11 +985,6 @@
         });
 
         handleDeviceChange();
-
-        // Register Service Worker for PWA
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(err => console.log('ServiceWorker registration failed: ', err));
-        }
     </script>
 </body>
 </html>
