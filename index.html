@@ -92,6 +92,67 @@
             border-radius: 4px;
         }
 
+        /* Second Page Specific Styling */
+        .second-page {
+            display: none; /* Shown dynamically via JS */
+            flex-direction: row;
+            padding: 0 !important; /* Overriding to allow 90mm full height */
+            margin-top: 20px;
+        }
+
+        .receipt-space {
+            width: 90mm;
+            min-height: 100%;
+            border-right: 2px dashed var(--main-purple);
+            background-color: #faf5ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        .receipt-text {
+            transform: rotate(-90deg);
+            color: var(--main-purple);
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 2px;
+            opacity: 0.3;
+            white-space: nowrap;
+        }
+
+        .tips-space {
+            flex: 1;
+            padding: 20mm 15mm;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+
+        .tips-title {
+            color: var(--main-purple);
+            font-size: 36px;
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--main-purple);
+            padding-bottom: 10px;
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .tip-item {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
+            background: var(--light-purple);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--main-purple);
+            text-align: center;
+        }
+
         /* Header Section */
         .header {
             display: flex;
@@ -353,6 +414,18 @@
             .service-card {
                 grid-column: span 1 !important;
             }
+            .second-page {
+                flex-direction: column;
+            }
+            .receipt-space {
+                width: 100%;
+                min-height: 50px;
+                border-right: none;
+                border-bottom: 2px dashed var(--main-purple);
+            }
+            .receipt-text {
+                transform: none;
+            }
         }
 
         @media (max-width: 500px) {
@@ -364,7 +437,7 @@
             }
         }
 
-        /* Print Settings - Strictly optimized to fit one single A4 page */
+        /* Print Settings */
         @page {
             size: A4;
             margin: 0;
@@ -391,6 +464,37 @@
                 border-radius: 0;
                 margin: 0;
             }
+            
+            /* Second page print rules to ensure it breaks perfectly */
+            .second-page {
+                padding: 0 !important;
+                margin-top: 0 !important;
+                page-break-before: always !important;
+                break-before: page !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            .receipt-space {
+                width: 90mm !important;
+                border-right: 2px dashed var(--main-purple) !important;
+                background-color: #faf5ff !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .tips-space {
+                padding: 15mm !important;
+            }
+
+            .tip-item {
+                font-size: 16px !important;
+                padding: 12px 15px !important;
+                background-color: var(--light-purple) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
             .header {
                 padding-bottom: 2mm !important;
                 margin-bottom: 4mm !important;
@@ -500,6 +604,7 @@
         </div>
     </div>
 
+    <!-- First Page: Setup Sheet -->
     <div class="a4-sheet">
         <header class="header">
             <div>
@@ -645,6 +750,16 @@
 
     </div>
 
+    <!-- Second Page: Helpful Tips & Receipt (Dynamically populated) -->
+    <div class="a4-sheet second-page" id="second-page">
+        <div class="receipt-space">
+            <span class="receipt-text">ATTACH RECEIPT HERE</span>
+        </div>
+        <div class="tips-space" id="tips-space">
+            <!-- Tips inserted here by JavaScript -->
+        </div>
+    </div>
+
     <script>
         function populateYears(elementId) {
             const select = document.getElementById(elementId);
@@ -733,6 +848,11 @@
             const promoBanner = document.getElementById('promo-banner');
             const imeiGroup = document.getElementById('imei-group');
             const preorderGroup = document.getElementById('preorder-group');
+            
+            // Second page elements
+            const secondPage = document.getElementById('second-page');
+            const tipsSpace = document.getElementById('tips-space');
+            
             const selectedDevice = deviceSelect.value;
             
             iconContainer.innerHTML = icons[selectedDevice];
@@ -783,6 +903,7 @@
                 });
             }
 
+            // Handle First Page Promo Banners
             if (['laptop', 'aio', 'tower'].includes(selectedDevice)) {
                 promoBanner.innerHTML = `
                     <p>Internet running slow speak to your advisor about your bill and possible upgrade</p>
@@ -808,6 +929,37 @@
                 promoBanner.style.display = 'block';
             } else {
                 promoBanner.style.display = 'none';
+            }
+
+            // Handle Second Page Content Based on Device
+            if (selectedDevice === 'none') {
+                secondPage.style.display = 'none';
+            } else {
+                secondPage.style.display = 'flex';
+                let tipsHtml = `<h2 class="tips-title">Helpful Tips</h2>`;
+
+                if (['laptop', 'aio', 'tower'].includes(selectedDevice)) {
+                    tipsHtml += `
+                        <div class="tip-item">Please check your passwords are correct and up-to-date before leaving</div>
+                        <div class="tip-item">On your return please bring your mobile phone and bank card information to help with any setup of antivirus</div>
+                        <div class="tip-item">Internet running slow at home or possibly over paying speak to an advisor to help find the best deal for you !!!</div>
+                        <div class="tip-item"><strong>Did you know you can check if your over paying on your mobile phone contract</strong> Texting the word INFO to 85075 is a free UK mobile service that tells you whether you are still in a minimum-term contract with your mobile provider and if you owe any early termination fees. Speak to one of our advisors today about beating your price !!!!</div>
+                    `;
+                } else if (['mobile', 'tablet'].includes(selectedDevice)) {
+                    tipsHtml += `
+                        <div class="tip-item">Please check your passwords are correct and up-to-date before leaving</div>
+                        <div class="tip-item">On your return please bring your bank card to help with any setup of antivirus or booking out of your phone</div>
+                        <div class="tip-item">Internet running slow at home or possibly over paying speak to an advisor to help find the best deal for you !!!</div>
+                    `;
+
+                    // Add the extra text exclusively for tablets
+                    if (selectedDevice === 'tablet') {
+                        tipsHtml += `
+                            <div class="tip-item"><strong>Did you know you can check if your over paying on your mobile phone contract</strong> Texting the word INFO to 85075 is a free UK mobile service that tells you whether you are still in a minimum-term contract with your mobile provider and if you owe any early termination fees. Speak to one of our advisors today about beating your price !!!!</div>
+                        `;
+                    }
+                }
+                tipsSpace.innerHTML = tipsHtml;
             }
         }
 
