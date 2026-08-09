@@ -645,13 +645,13 @@
             </div>
 
             <div class="form-group">
-                <label for="categoryType">Receipt / CUR / Medics</label>
-                <input type="text" id="categoryType" placeholder="Enter Receipt / CUR / Medics" autocomplete="off">
+                <label for="receiptCur">Receipt / CUR</label>
+                <input type="text" id="receiptCur" placeholder="Enter Receipt / CUR" autocomplete="off">
             </div>
 
             <div class="form-group">
-                <label for="dob">Date of Birth <span style="font-weight: normal; font-size: 0.9em;">(only needed for new account creation)</span></label>
-                <input type="text" id="dob" placeholder="DD/MM/YYYY" autocomplete="off">
+                <label for="medics">Medics</label>
+                <input type="text" id="medics" placeholder="Enter Medics" autocomplete="off">
             </div>
 
             <div class="form-group">
@@ -667,6 +667,11 @@
             <div class="form-group">
                 <label for="altEmail">Alternative Email Address</label>
                 <input type="email" id="altEmail" placeholder="Enter alternative email address" autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth <span style="font-weight: normal; font-size: 0.9em;">(only needed for new account creation)</span></label>
+                <input type="text" id="dob" placeholder="DD/MM/YYYY" autocomplete="off">
             </div>
 
             <div class="form-group full-width">
@@ -965,7 +970,7 @@
             }
         }
 
-        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'categoryType', 'email', 'altEmail', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
+        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'receiptCur', 'medics', 'email', 'altEmail', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
 
         function clearAppData() {
             if (confirm("Are you sure you want to clear all form fields?")) {
