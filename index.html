@@ -494,12 +494,18 @@
         }
 
         @media print {
-            /* Hide input placeholders when printing so empty fields remain totally blank */
+            /* Force empty text fields and unselected dropdowns to render visually blank */
             ::placeholder,
             ::-webkit-input-placeholder,
             :-ms-input-placeholder {
                 color: transparent !important;
+                -webkit-text-fill-color: transparent !important;
                 opacity: 0 !important;
+            }
+
+            .print-transparent-text {
+                color: transparent !important;
+                -webkit-text-fill-color: transparent !important;
             }
 
             body {
@@ -680,7 +686,7 @@
             <button class="app-btn" onclick="clearAppData()">🗑️ Clear Form</button>
         </div>
         <div class="toolbar-group">
-            <button class="app-btn primary" onclick="window.print()">🖨️ Print</button>
+            <button class="app-btn primary" onclick="triggerPrint()">🖨️ Print</button>
         </div>
     </div>
 
@@ -1087,6 +1093,51 @@
                 handleDeviceChange();
             }
         }
+
+        /* Preparation before print: hides placeholders & unselected default values */
+        function prepareForPrint() {
+            // Strip placeholders from empty text fields so browser print engines don't render them
+            document.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach(el => {
+                if (!el.value || el.value.trim() === '') {
+                    el.dataset.tempPlaceholder = el.placeholder || '';
+                    el.placeholder = '';
+                    el.classList.add('print-transparent-text');
+                }
+            });
+
+            // Make unselected/default select options invisible when printed
+            document.querySelectorAll('select').forEach(el => {
+                if (el.value === 'none' || el.value === '' || el.value === '0') {
+                    el.dataset.tempColor = el.style.color || '';
+                    el.classList.add('print-transparent-text');
+                }
+            });
+        }
+
+        /* Restoration after print: restores placeholders & original styles */
+        function restoreAfterPrint() {
+            document.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach(el => {
+                if (el.dataset.tempPlaceholder !== undefined) {
+                    el.placeholder = el.dataset.tempPlaceholder;
+                    delete el.dataset.tempPlaceholder;
+                }
+                el.classList.remove('print-transparent-text');
+            });
+
+            document.querySelectorAll('select').forEach(el => {
+                if (el.dataset.tempColor !== undefined) {
+                    delete el.dataset.tempColor;
+                }
+                el.classList.remove('print-transparent-text');
+            });
+        }
+
+        function triggerPrint() {
+            window.print();
+        }
+
+        window.addEventListener('beforeprint', prepareForPrint);
+        window.addEventListener('afterprint', restoreAfterPrint);
 
         window.addEventListener('pageshow', (event) => {
             if (event.persisted) {
