@@ -197,6 +197,107 @@
             border-right: none;
         }
 
+        /* Third Page (iPhone Preparation Guide) Styling */
+        .iphone-guide-page {
+            display: none;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .guide-header {
+            text-align: center;
+            border-bottom: 3px solid var(--main-purple);
+            padding-bottom: 10px;
+        }
+
+        .guide-header h2 {
+            color: var(--main-purple);
+            font-size: 28px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .guide-header h3 {
+            color: var(--label-purple);
+            font-size: 18px;
+            margin: 6px 0 2px 0;
+        }
+
+        .guide-subtext {
+            color: #555;
+            font-size: 13px;
+            margin: 4px 0 0 0;
+            font-style: italic;
+        }
+
+        .security-notice {
+            background-color: #fef2f2;
+            border-left: 5px solid #ef4444;
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 13.5px;
+            line-height: 1.45;
+        }
+
+        .guide-section {
+            display: flex;
+            gap: 15px;
+            background-color: var(--light-purple);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1.5px solid var(--main-purple);
+        }
+
+        .step-badge {
+            background-color: var(--main-purple);
+            color: var(--white);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h4 {
+            margin: 0 0 8px 0;
+            color: var(--main-purple);
+            font-size: 17px;
+        }
+
+        .step-content ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .step-content li {
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .delay-note {
+            margin-top: 10px;
+            background-color: #fffbe2;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 13px;
+            color: #854d0e;
+            line-height: 1.4;
+        }
+
         /* Header Section */
         .header {
             display: flex;
@@ -280,8 +381,40 @@
             gap: 5px;
         }
 
+        .form-group.dob-group {
+            text-align: center;
+        }
+
         .full-width {
             grid-column: span 2;
+        }
+
+        /* Date of Birth Input Container */
+        .dob-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .dob-container input {
+            text-align: center;
+        }
+
+        .dob-container input#dobDay,
+        .dob-container input#dobMonth {
+            width: 65px;
+        }
+
+        .dob-container input#dobYear {
+            width: 95px;
+        }
+
+        .dob-separator {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--main-purple);
+            user-select: none;
         }
 
         /* Form Elements Styling */
@@ -559,6 +692,41 @@
                 print-color-adjust: exact !important;
             }
 
+            /* Third page print rules */
+            .iphone-guide-page {
+                margin-top: 0 !important;
+                padding: 10mm 15mm !important;
+                page-break-before: always !important;
+                break-before: page !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .guide-section {
+                background-color: var(--light-purple) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .security-notice {
+                background-color: #fef2f2 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .delay-note {
+                background-color: #fffbe2 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .step-badge {
+                background-color: var(--main-purple) !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
             /* Survey print rules */
             .survey-numbers {
                 background: linear-gradient(to right, #ef4444 0%, #ef4444 65%, #f59e0b 82%, #22c55e 100%) !important;
@@ -616,6 +784,20 @@
                 font-size: 10.5px !important;
                 border: 2px solid var(--main-purple) !important;
             }
+
+            /* Print tweaks for Date of Birth */
+            .dob-container input#dobDay,
+            .dob-container input#dobMonth {
+                width: 38px !important;
+            }
+            .dob-container input#dobYear {
+                width: 58px !important;
+            }
+            .dob-separator {
+                font-size: 13px !important;
+                color: var(--main-purple) !important;
+            }
+
             textarea#address {
                 height: auto !important;
                 min-height: 6.2em !important;
@@ -757,9 +939,15 @@
                 <input type="email" id="altEmail" placeholder="Enter alternative email address" autocomplete="email">
             </div>
 
-            <div class="form-group">
-                <label for="dob">Date of Birth <span style="font-weight: normal; font-size: 0.9em;">(only needed for new account creation)</span></label>
-                <input type="text" id="dob" placeholder="DD/MM/YYYY" autocomplete="off">
+            <div class="form-group dob-group">
+                <label>Date of Birth <span style="font-weight: normal; font-size: 0.9em;">(only needed for new account creation)</span></label>
+                <div class="dob-container">
+                    <input type="text" id="dobDay" placeholder="DD" maxlength="2" autocomplete="off" aria-label="Day">
+                    <span class="dob-separator">/</span>
+                    <input type="text" id="dobMonth" placeholder="MM" maxlength="2" autocomplete="off" aria-label="Month">
+                    <span class="dob-separator">/</span>
+                    <input type="text" id="dobYear" placeholder="YYYY" maxlength="4" autocomplete="off" aria-label="Year">
+                </div>
             </div>
 
             <div class="form-group full-width">
@@ -836,6 +1024,20 @@
                 <span>Data Transfer</span>
                 <input type="checkbox" id="dataCheck"> 
             </label>
+
+            <!-- Updated iPhone Trade In Box -->
+            <label class="service-card checkbox-card" id="iphone-trade-in-card" style="display: none;">
+                <div class="pen-tick-box"></div>
+                <span>iPhone trade in</span>
+                <input type="checkbox" id="iphoneTradeInCheck" onchange="toggleIphoneGuide()"> 
+            </label>
+
+            <!-- New Android Trade In Box -->
+            <label class="service-card checkbox-card" id="android-trade-in-card" style="display: none;">
+                <div class="pen-tick-box"></div>
+                <span>Android trade in</span>
+                <input type="checkbox" id="androidTradeInCheck"> 
+            </label>
         </div>
 
         <div class="notes-section">
@@ -853,6 +1055,50 @@
         </div>
         <div class="tips-space" id="tips-space">
             <!-- Tips inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Third Page: iPhone Preparation Guide (Shown when Mobile + iPhone Trade In selected) -->
+    <div class="a4-sheet iphone-guide-page" id="iphone-guide-page">
+        <div class="guide-header">
+            <h2>IPHONE PREPARATION GUIDE</h2>
+            <h3>How to Turn Off Stolen Device Protection & Find My iPhone</h3>
+            <p class="guide-subtext">A clear, step-by-step reference sheet to prepare your device for trade-in, sale, repair, or factory reset</p>
+        </div>
+
+        <div class="security-notice">
+            <strong>Important Security Notice:</strong>
+            Disabling these features removes Activation Lock and Location Tracking, leaving your device unprotected if lost or stolen. Only perform these steps if you are selling, trading in, giving away, or sending your iPhone for service.
+        </div>
+
+        <div class="guide-section">
+            <div class="step-badge">1</div>
+            <div class="step-content">
+                <h4>Turn Off Stolen Device Protection (iOS 17.3 or later)</h4>
+                <ol>
+                    <li>Open the <strong>Settings</strong> app on your iPhone.</li>
+                    <li>Scroll down and tap <strong>Face ID & Passcode</strong> (or <strong>Touch ID & Passcode</strong> on older models). Enter your passcode when prompted.</li>
+                    <li>Scroll down to <strong>Stolen Device Protection</strong> and tap to manage settings.</li>
+                    <li>Tap the switch to turn Stolen Device Protection <strong>OFF</strong> (the switch will turn grey).</li>
+                </ol>
+                <div class="delay-note">
+                    <strong>Mandatory Security Delay Note:</strong> If you are away from a designated "Familiar Location" (such as your home or workplace), iOS will enforce a mandatory 1-hour security delay before this setting fully turns off. Once the delay elapses, return to this screen to complete deactivation.
+                </div>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <div class="step-badge">2</div>
+            <div class="step-content">
+                <h4>Turn Off Find My iPhone & Activation Lock</h4>
+                <ol>
+                    <li>Return to the main page of the <strong>Settings</strong> app.</li>
+                    <li>Tap your <strong>Apple ID / Name banner</strong> at the very top of the settings menu.</li>
+                    <li>Tap <strong>Find My</strong>, then select <strong>Find My iPhone</strong> at the top of the screen.</li>
+                    <li>Tap the green toggle switch next to <strong>Find My iPhone</strong> to turn it off.</li>
+                    <li>When prompted, enter your <strong>Apple ID Password</strong> and tap <strong>Turn Off</strong> in the upper right corner. The toggle switch will turn grey to confirm it is disabled.</li>
+                </ol>
+            </div>
         </div>
     </div>
 
@@ -938,12 +1184,30 @@
             tablet: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="15" y="10" width="70" height="80" rx="6" /><circle cx="50" cy="80" r="4" /></svg>`
         };
 
+        function toggleIphoneGuide() {
+            const deviceSelect = document.getElementById('device');
+            const iphoneTradeInCheck = document.getElementById('iphoneTradeInCheck');
+            const iphoneGuidePage = document.getElementById('iphone-guide-page');
+            
+            // Only toggle for iPhone trade in
+            if (deviceSelect.value === 'mobile' && iphoneTradeInCheck.checked) {
+                iphoneGuidePage.style.display = 'flex';
+            } else {
+                iphoneGuidePage.style.display = 'none';
+            }
+        }
+
         function handleDeviceChange() {
             const deviceSelect = document.getElementById('device');
             const iconContainer = document.getElementById('icon-container');
             const promoBanner = document.getElementById('promo-banner');
             const imeiGroup = document.getElementById('imei-group');
             const preorderGroup = document.getElementById('preorder-group');
+            
+            const iphoneTradeInCard = document.getElementById('iphone-trade-in-card');
+            const iphoneTradeInCheck = document.getElementById('iphoneTradeInCheck');
+            const androidTradeInCard = document.getElementById('android-trade-in-card');
+            const androidTradeInCheck = document.getElementById('androidTradeInCheck');
             
             // Second page elements
             const secondPage = document.getElementById('second-page');
@@ -958,10 +1222,18 @@
             if (selectedDevice === 'mobile') {
                 imeiGroup.style.display = 'flex';
                 preorderGroup.style.display = 'flex';
+                iphoneTradeInCard.style.display = 'flex';
+                androidTradeInCard.style.display = 'flex';
             } else {
                 imeiGroup.style.display = 'none';
                 preorderGroup.style.display = 'none';
+                iphoneTradeInCard.style.display = 'none';
+                iphoneTradeInCheck.checked = false;
+                androidTradeInCard.style.display = 'none';
+                androidTradeInCheck.checked = false;
             }
+
+            toggleIphoneGuide();
 
             const cards = [
                 document.getElementById('antivirus-card'),
@@ -970,7 +1242,9 @@
                 document.getElementById('zagg-card'),
                 document.getElementById('cloud-card'),
                 document.getElementById('vpn-card'),
-                document.getElementById('data-card')
+                document.getElementById('data-card'),
+                document.getElementById('iphone-trade-in-card'),
+                document.getElementById('android-trade-in-card')
             ];
 
             if (['tower', 'aio', 'mobile'].includes(selectedDevice)) {
@@ -1056,7 +1330,7 @@
                     }
                 }
                 
-                // Add the rephrased and unbolded survey section to ALL device types at the end of the tips
+                // Add the survey section to ALL device types at the end of the tips
                 tipsHtml += `
                     <div class="tip-item">
                         Soon you will receive an email asking you to rate our service today, and this is how our survey rates our colleagues:
@@ -1076,7 +1350,7 @@
             }
         }
 
-        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'receiptCur', 'medics', 'email', 'altEmail', 'address', 'dob', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'notes'];
+        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'receiptCur', 'medics', 'email', 'altEmail', 'address', 'dobDay', 'dobMonth', 'dobYear', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'iphoneTradeInCheck', 'androidTradeInCheck', 'notes'];
 
         function clearAppData() {
             if (confirm("Are you sure you want to clear all form fields?")) {
@@ -1092,6 +1366,26 @@
                 });
                 handleDeviceChange();
             }
+        }
+
+        /* Date of Birth auto-advancing focus */
+        const dobDay = document.getElementById('dobDay');
+        const dobMonth = document.getElementById('dobMonth');
+        const dobYear = document.getElementById('dobYear');
+
+        if (dobDay && dobMonth && dobYear) {
+            dobDay.addEventListener('input', () => {
+                if (dobDay.value.length === 2) dobMonth.focus();
+            });
+            dobMonth.addEventListener('input', () => {
+                if (dobMonth.value.length === 2) dobYear.focus();
+            });
+            dobMonth.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && dobMonth.value === '') dobDay.focus();
+            });
+            dobYear.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && dobYear.value === '') dobMonth.focus();
+            });
         }
 
         /* Preparation before print: hides placeholders & unselected default values */
