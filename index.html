@@ -1064,6 +1064,13 @@
                 <span>Android trade in</span>
                 <input type="checkbox" id="androidTradeInCheck" onchange="toggleTradeInGuides()"> 
             </label>
+
+            <!-- iOS Trade In Box for Tablet -->
+            <label class="service-card checkbox-card" id="ios-trade-in-card" style="display: none;">
+                <div class="pen-tick-box"></div>
+                <span>iOS trade in</span>
+                <input type="checkbox" id="iosTradeInCheck" onchange="toggleTradeInGuides()"> 
+            </label>
         </div>
 
         <div class="notes-section">
@@ -1084,17 +1091,17 @@
         </div>
     </div>
 
-    <!-- Third Page (Apple): iPhone Preparation Guide -->
+    <!-- Third Page (Apple): iOS / iPhone Preparation Guide -->
     <div class="a4-sheet iphone-guide-page" id="iphone-guide-page">
         <div class="guide-header">
-            <h2>IPHONE PREPARATION GUIDE</h2>
+            <h2>IOS / IPHONE PREPARATION GUIDE</h2>
             <h3>How to Prepare Your Device For Trade-In</h3>
             <p class="guide-subtext">A clear, step-by-step reference sheet to prepare your device for trade-in, sale, repair, or factory reset</p>
         </div>
 
         <div class="security-notice">
             <strong>Important Security Notice:</strong>
-            Disabling these features removes Activation Lock and Location Tracking, leaving your device unprotected if lost or stolen. Only perform these steps if you are selling, trading in, giving away, or sending your iPhone for service.
+            Disabling these features removes Activation Lock and Location Tracking, leaving your device unprotected if lost or stolen. Only perform these steps if you are selling, trading in, giving away, or sending your device for service.
         </div>
 
         <div class="guide-section">
@@ -1102,7 +1109,7 @@
             <div class="step-content">
                 <h4>Turn Off Stolen Device Protection (iOS 17.3 or later)</h4>
                 <ol>
-                    <li>Open the <strong>Settings</strong> app on your iPhone.</li>
+                    <li>Open the <strong>Settings</strong> app on your iPhone or iPad.</li>
                     <li>Scroll down and tap <strong>Face ID & Passcode</strong> (or <strong>Touch ID & Passcode</strong> on older models). Enter your passcode when prompted.</li>
                     <li>Scroll down to <strong>Stolen Device Protection</strong> and tap to manage settings.</li>
                     <li>Tap the switch to turn Stolen Device Protection <strong>OFF</strong> (the switch will turn grey).</li>
@@ -1116,25 +1123,25 @@
         <div class="guide-section">
             <div class="step-badge">2</div>
             <div class="step-content">
-                <h4>Turn Off Find My iPhone & Activation Lock</h4>
+                <h4>Turn Off Find My iPhone / iPad & Activation Lock</h4>
                 <ol>
                     <li>Return to the main page of the <strong>Settings</strong> app.</li>
                     <li>Tap your <strong>Apple ID / Name banner</strong> at the very top of the settings menu.</li>
-                    <li>Tap <strong>Find My</strong>, then select <strong>Find My iPhone</strong> at the top of the screen.</li>
-                    <li>Tap the green toggle switch next to <strong>Find My iPhone</strong> to turn it off.</li>
+                    <li>Tap <strong>Find My</strong>, then select <strong>Find My iPhone / iPad</strong> at the top of the screen.</li>
+                    <li>Tap the green toggle switch next to <strong>Find My iPhone / iPad</strong> to turn it off.</li>
                     <li>When prompted, enter your <strong>Apple ID Password</strong> and tap <strong>Turn Off</strong> in the upper right corner. The toggle switch will turn grey to confirm it is disabled.</li>
                 </ol>
             </div>
         </div>
 
         <!-- Separate WhatsApp Backup Section (Non-Step Heading) -->
-        <div class="whatsapp-guide-box">
+        <div class="whatsapp-guide-box" id="whatsapp-guide-box">
             <div class="whatsapp-guide-header">
-                <h4>💬 WhatsApp Backup Guide (iPhone / iOS)</h4>
+                <h4>💬 WhatsApp Backup Guide (iPhone / iPad / iOS)</h4>
             </div>
             <p style="margin: 0 0 5px; font-size: 13px; color: #555;"><strong>Before You Start:</strong> Connect to Wi-Fi, ensure Cloud Account Signed In, check Free Storage Available, and Battery &gt; 50%.</p>
             <ol style="margin: 0; padding-left: 20px;">
-                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Open iPhone Settings &gt; [Your Name] &gt; iCloud &gt; Turn WhatsApp <strong>ON</strong>.</li>
+                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Open Settings &gt; [Your Name] &gt; iCloud &gt; Turn WhatsApp <strong>ON</strong>.</li>
                 <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Open WhatsApp, tap <strong>Settings</strong> tab at bottom.</li>
                 <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Navigate to <strong>Chats &gt; Chat Backup</strong>.</li>
                 <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Tap <strong>Auto Backup</strong> to select daily or weekly schedule.</li>
@@ -1259,26 +1266,27 @@
             const deviceSelect = document.getElementById('device');
             const iphoneTradeInCheck = document.getElementById('iphoneTradeInCheck');
             const androidTradeInCheck = document.getElementById('androidTradeInCheck');
+            const iosTradeInCheck = document.getElementById('iosTradeInCheck');
             const iphoneGuidePage = document.getElementById('iphone-guide-page');
             const androidGuidePage = document.getElementById('android-guide-page');
+            const whatsappBox = document.getElementById('whatsapp-guide-box');
             
-            if (deviceSelect.value === 'mobile') {
-                // Show iPhone guide page if iPhone trade in checked
-                if (iphoneTradeInCheck.checked) {
-                    iphoneGuidePage.style.display = 'flex';
-                } else {
-                    iphoneGuidePage.style.display = 'none';
-                }
+            const isIphoneChecked = iphoneTradeInCheck && iphoneTradeInCheck.checked;
+            const isIosChecked = iosTradeInCheck && iosTradeInCheck.checked;
+            const isAndroidChecked = androidTradeInCheck && androidTradeInCheck.checked;
 
-                // Show Android guide page if Android trade in checked
-                if (androidTradeInCheck.checked) {
-                    androidGuidePage.style.display = 'flex';
-                } else {
-                    androidGuidePage.style.display = 'none';
-                }
+            if (deviceSelect.value === 'mobile') {
+                iphoneGuidePage.style.display = isIphoneChecked ? 'flex' : 'none';
+                androidGuidePage.style.display = isAndroidChecked ? 'flex' : 'none';
+                if (whatsappBox) whatsappBox.style.display = 'flex';
+            } else if (deviceSelect.value === 'tablet') {
+                iphoneGuidePage.style.display = isIosChecked ? 'flex' : 'none';
+                androidGuidePage.style.display = 'none';
+                if (whatsappBox) whatsappBox.style.display = 'none';
             } else {
                 iphoneGuidePage.style.display = 'none';
                 androidGuidePage.style.display = 'none';
+                if (whatsappBox) whatsappBox.style.display = 'flex';
             }
         }
 
@@ -1293,6 +1301,8 @@
             const iphoneTradeInCheck = document.getElementById('iphoneTradeInCheck');
             const androidTradeInCard = document.getElementById('android-trade-in-card');
             const androidTradeInCheck = document.getElementById('androidTradeInCheck');
+            const iosTradeInCard = document.getElementById('ios-trade-in-card');
+            const iosTradeInCheck = document.getElementById('iosTradeInCheck');
             
             // Second page elements
             const secondPage = document.getElementById('second-page');
@@ -1309,6 +1319,16 @@
                 preorderGroup.style.display = 'flex';
                 iphoneTradeInCard.style.display = 'flex';
                 androidTradeInCard.style.display = 'flex';
+                iosTradeInCard.style.display = 'none';
+                iosTradeInCheck.checked = false;
+            } else if (selectedDevice === 'tablet') {
+                imeiGroup.style.display = 'flex';
+                preorderGroup.style.display = 'none';
+                iphoneTradeInCard.style.display = 'none';
+                iphoneTradeInCheck.checked = false;
+                androidTradeInCard.style.display = 'none';
+                androidTradeInCheck.checked = false;
+                iosTradeInCard.style.display = 'flex';
             } else {
                 imeiGroup.style.display = 'none';
                 preorderGroup.style.display = 'none';
@@ -1316,6 +1336,8 @@
                 iphoneTradeInCheck.checked = false;
                 androidTradeInCard.style.display = 'none';
                 androidTradeInCheck.checked = false;
+                iosTradeInCard.style.display = 'none';
+                iosTradeInCheck.checked = false;
             }
 
             toggleTradeInGuides();
@@ -1329,32 +1351,33 @@
                 document.getElementById('vpn-card'),
                 document.getElementById('data-card'),
                 document.getElementById('iphone-trade-in-card'),
-                document.getElementById('android-trade-in-card')
+                document.getElementById('android-trade-in-card'),
+                document.getElementById('ios-trade-in-card')
             ];
 
+            const visibleCards = cards.filter(card => card && card.style.display !== 'none');
+
             if (['tower', 'aio', 'mobile'].includes(selectedDevice)) {
-                cards.forEach(card => {
-                    if (card.style.display !== 'none') {
-                        card.style.gridColumn = 'span 4';
-                    }
+                visibleCards.forEach(card => {
+                    card.style.gridColumn = 'span 4';
                 });
             } else if (['laptop', 'tablet'].includes(selectedDevice)) {
-                let visibleCount = 0;
-                cards.forEach(card => {
-                    if (card.style.display !== 'none') {
-                        visibleCount++;
-                        if (visibleCount <= 4) {
+                if (visibleCards.length === 8 || visibleCards.length === 4) {
+                    visibleCards.forEach(card => {
+                        card.style.gridColumn = 'span 3';
+                    });
+                } else {
+                    visibleCards.forEach((card, idx) => {
+                        if (idx < 4) {
                             card.style.gridColumn = 'span 3';
                         } else {
                             card.style.gridColumn = 'span 4';
                         }
-                    }
-                });
+                    });
+                }
             } else {
-                cards.forEach(card => {
-                    if (card.style.display !== 'none') {
-                        card.style.gridColumn = 'span 3';
-                    }
+                visibleCards.forEach(card => {
+                    card.style.gridColumn = 'span 3';
                 });
             }
 
@@ -1371,7 +1394,7 @@
                 promoBanner.innerHTML = `
                     <p>Internet running slow speak to your advisor about your bill and possible upgrade</p>
                     <p>Are you over paying for your mobile phone contract please speak to your advisor to see if we can beat the price!!!</p>
-                    <p><strong>Please complete any back ups before coming in for your new device including WhatsApp</strong></p>
+                    <p><strong>Please complete any back ups before coming in for your new device</strong></p>
                     <p><strong>Please ensure your current password for Google or Apple to ensure a password reset isn't required and find my device and theft protection is TURNED OFF!!!</strong></p>
                 `;
                 promoBanner.style.display = 'block';
@@ -1401,8 +1424,12 @@
                         <div class="tip-item"><strong>Did you know you can check if your over paying on your mobile phone contract</strong><br><br>Texting the word INFO to 85075 is a free UK mobile service that tells you whether you are still in a minimum-term contract with your mobile provider and if you owe any early termination fees. Speak to one of our advisors today about beating your price !!!!</div>
                     `;
                 } else if (['mobile', 'tablet'].includes(selectedDevice)) {
+                    const backupText = selectedDevice === 'tablet' 
+                        ? 'Please complete any back ups before coming in for your new device' 
+                        : 'Please complete any back ups before coming in for your new device including WhatsApp';
+
                     tipsHtml += `
-                        <div class="tip-item">Please complete any back ups before coming in for your new device including WhatsApp</div>
+                        <div class="tip-item">${backupText}</div>
                         <div class="tip-item">Please ensure your current password for Google or Apple to ensure a password reset isn't required and find my device and theft protection is TURNED OFF!!!</div>
                         <div class="tip-item">On your return please bring your bank card to help with any setup of antivirus or booking out of your phone</div>
                         <div class="tip-item">Internet running slow at home or possibly over paying speak to an advisor to help find the best deal for you !!!</div>
@@ -1435,7 +1462,7 @@
             }
         }
 
-        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'receiptCur', 'medics', 'email', 'altEmail', 'address', 'dobDay', 'dobMonth', 'dobYear', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'iphoneTradeInCheck', 'androidTradeInCheck', 'notes'];
+        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'receiptCur', 'medics', 'email', 'altEmail', 'address', 'dobDay', 'dobMonth', 'dobYear', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'iphoneTradeInCheck', 'androidTradeInCheck', 'iosTradeInCheck', 'notes'];
 
         function clearAppData() {
             if (confirm("Are you sure you want to clear all form fields?")) {
