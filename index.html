@@ -197,8 +197,8 @@
             border-right: none;
         }
 
-        /* Third Page (iPhone Preparation Guide) Styling */
-        .iphone-guide-page {
+        /* Third Page (Guide) Styling */
+        .iphone-guide-page, .android-guide-page {
             display: none;
             flex-direction: column;
             gap: 18px;
@@ -285,6 +285,27 @@
             font-size: 14px;
             color: #333;
             line-height: 1.4;
+        }
+
+        /* Separate WhatsApp Guide Box Styling */
+        .whatsapp-guide-box {
+            background-color: var(--light-purple);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1.5px solid var(--main-purple);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .whatsapp-guide-header h4 {
+            margin: 0 0 8px 0;
+            color: var(--main-purple);
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #d8b4fe;
+            padding-bottom: 6px;
         }
 
         .delay-note {
@@ -693,7 +714,7 @@
             }
 
             /* Third page print rules */
-            .iphone-guide-page {
+            .iphone-guide-page, .android-guide-page {
                 margin-top: 0 !important;
                 padding: 10mm 15mm !important;
                 page-break-before: always !important;
@@ -703,6 +724,12 @@
             }
 
             .guide-section {
+                background-color: var(--light-purple) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .whatsapp-guide-box {
                 background-color: var(--light-purple) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -1025,18 +1052,17 @@
                 <input type="checkbox" id="dataCheck"> 
             </label>
 
-            <!-- Updated iPhone Trade In Box -->
             <label class="service-card checkbox-card" id="iphone-trade-in-card" style="display: none;">
                 <div class="pen-tick-box"></div>
                 <span>iPhone trade in</span>
-                <input type="checkbox" id="iphoneTradeInCheck" onchange="toggleIphoneGuide()"> 
+                <input type="checkbox" id="iphoneTradeInCheck" onchange="toggleTradeInGuides()"> 
             </label>
 
-            <!-- New Android Trade In Box -->
+            <!-- Android Trade In Box -->
             <label class="service-card checkbox-card" id="android-trade-in-card" style="display: none;">
                 <div class="pen-tick-box"></div>
                 <span>Android trade in</span>
-                <input type="checkbox" id="androidTradeInCheck"> 
+                <input type="checkbox" id="androidTradeInCheck" onchange="toggleTradeInGuides()"> 
             </label>
         </div>
 
@@ -1048,7 +1074,7 @@
 
     </div>
 
-    <!-- Second Page: Helpful Tips & Receipt (Dynamically populated) -->
+    <!-- Second Page: Helpful Tips & Receipt -->
     <div class="a4-sheet second-page" id="second-page">
         <div class="receipt-space">
             <span class="receipt-text">ATTACH RECEIPT HERE</span>
@@ -1058,11 +1084,11 @@
         </div>
     </div>
 
-    <!-- Third Page: iPhone Preparation Guide (Shown when Mobile + iPhone Trade In selected) -->
+    <!-- Third Page (Apple): iPhone Preparation Guide -->
     <div class="a4-sheet iphone-guide-page" id="iphone-guide-page">
         <div class="guide-header">
             <h2>IPHONE PREPARATION GUIDE</h2>
-            <h3>How to Turn Off Stolen Device Protection & Find My iPhone</h3>
+            <h3>How to Prepare Your Device For Trade-In</h3>
             <p class="guide-subtext">A clear, step-by-step reference sheet to prepare your device for trade-in, sale, repair, or factory reset</p>
         </div>
 
@@ -1100,6 +1126,51 @@
                 </ol>
             </div>
         </div>
+
+        <!-- Separate WhatsApp Backup Section (Non-Step Heading) -->
+        <div class="whatsapp-guide-box">
+            <div class="whatsapp-guide-header">
+                <h4>💬 WhatsApp Backup Guide (iPhone / iOS)</h4>
+            </div>
+            <p style="margin: 0 0 5px; font-size: 13px; color: #555;"><strong>Before You Start:</strong> Connect to Wi-Fi, ensure Cloud Account Signed In, check Free Storage Available, and Battery &gt; 50%.</p>
+            <ol style="margin: 0; padding-left: 20px;">
+                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Open iPhone Settings &gt; [Your Name] &gt; iCloud &gt; Turn WhatsApp <strong>ON</strong>.</li>
+                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Open WhatsApp, tap <strong>Settings</strong> tab at bottom.</li>
+                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Navigate to <strong>Chats &gt; Chat Backup</strong>.</li>
+                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Tap <strong>Auto Backup</strong> to select daily or weekly schedule.</li>
+                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Tap <strong>Back Up Now</strong> to execute a manual cloud backup.</li>
+            </ol>
+            <div class="delay-note">
+                <strong>Requirement:</strong> Available iCloud space must be at least 2.05x the size of your backup.
+            </div>
+        </div>
+    </div>
+
+    <!-- Third Page (Android): Android Preparation Guide -->
+    <div class="a4-sheet android-guide-page" id="android-guide-page">
+        <div class="guide-header">
+            <h2>ANDROID PREPARATION GUIDE</h2>
+            <h3>WhatsApp Backup Step-by-Step Reference</h3>
+            <p class="guide-subtext">A clear, step-by-step reference sheet to back up your WhatsApp data before trade-in</p>
+        </div>
+
+        <div class="guide-section">
+            <div class="step-badge">1</div>
+            <div class="step-content">
+                <h4>WhatsApp Backup (Google Drive)</h4>
+                <p style="margin: 0 0 5px; font-size: 13px; color: #555;"><strong>Before You Start:</strong> Connect to Wi-Fi, ensure Cloud Account Signed In, check Free Storage Available, and Battery &gt; 50%.</p>
+                <ol>
+                    <li>Open WhatsApp and tap <strong>More options</strong> (three dots) at top right.</li>
+                    <li>Tap <strong>Settings &gt; Chats &gt; Chat backup</strong>.</li>
+                    <li>Select <strong>Google Account</strong> to link your storage account.</li>
+                    <li>Set Back up to Google Drive frequency (Daily/Weekly).</li>
+                    <li>Tap the green <strong>BACK UP</strong> button to start immediate backup.</li>
+                </ol>
+                <div class="delay-note">
+                    <strong>Tip:</strong> Turn on "Include videos" only if you have sufficient Google Drive storage.
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1122,7 +1193,7 @@
             all: [
                 {value: 'none', text: 'None'},
                 {value: 'elite', text: 'Elite'},
-                {value: 'eco', text: 'Eco'},
+                {value: 'eco', text: 'Extreme'},
                 {value: 'extreme', text: 'Extreme'},
                 {value: 'privacy-matte', text: 'Privacy Matte'},
                 {value: 'matte', text: 'Matte'}
@@ -1184,16 +1255,30 @@
             tablet: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="15" y="10" width="70" height="80" rx="6" /><circle cx="50" cy="80" r="4" /></svg>`
         };
 
-        function toggleIphoneGuide() {
+        function toggleTradeInGuides() {
             const deviceSelect = document.getElementById('device');
             const iphoneTradeInCheck = document.getElementById('iphoneTradeInCheck');
+            const androidTradeInCheck = document.getElementById('androidTradeInCheck');
             const iphoneGuidePage = document.getElementById('iphone-guide-page');
+            const androidGuidePage = document.getElementById('android-guide-page');
             
-            // Only toggle for iPhone trade in
-            if (deviceSelect.value === 'mobile' && iphoneTradeInCheck.checked) {
-                iphoneGuidePage.style.display = 'flex';
+            if (deviceSelect.value === 'mobile') {
+                // Show iPhone guide page if iPhone trade in checked
+                if (iphoneTradeInCheck.checked) {
+                    iphoneGuidePage.style.display = 'flex';
+                } else {
+                    iphoneGuidePage.style.display = 'none';
+                }
+
+                // Show Android guide page if Android trade in checked
+                if (androidTradeInCheck.checked) {
+                    androidGuidePage.style.display = 'flex';
+                } else {
+                    androidGuidePage.style.display = 'none';
+                }
             } else {
                 iphoneGuidePage.style.display = 'none';
+                androidGuidePage.style.display = 'none';
             }
         }
 
@@ -1233,7 +1318,7 @@
                 androidTradeInCheck.checked = false;
             }
 
-            toggleIphoneGuide();
+            toggleTradeInGuides();
 
             const cards = [
                 document.getElementById('antivirus-card'),
