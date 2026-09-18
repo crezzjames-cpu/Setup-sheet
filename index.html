@@ -249,7 +249,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            flex: 1 1 calc(22% - 10px); /* Forces items into 2 rows and spreads them evenly */
+            flex: 1 1 calc(22% - 10px);
             min-width: 130px;
             box-sizing: border-box;
         }
@@ -443,6 +443,13 @@
             box-sizing: border-box;
         }
 
+        /* Third Page (Trade-In Guide) Styles */
+        .third-page {
+            display: none;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 700px) {
             .app-toolbar {
@@ -495,6 +502,10 @@
                 min-height: 297mm !important;
                 border-radius: 0;
                 margin: 0;
+                page-break-after: always;
+            }
+            .a4-sheet:last-child {
+                page-break-after: auto;
             }
             .voucher-card {
                 break-inside: avoid;
@@ -636,13 +647,13 @@
             </form>
         </div>
 
-        <!-- Service Barcode Sheet Container (Sole focus when Services selected) -->
+        <!-- Service Barcode Sheet Container -->
         <div class="service-vouchers-container" id="service-vouchers-container" style="display: none;">
             <h3 class="section-title" style="margin-bottom: 2px;">Service Codes & Barcodes Reference</h3>
             <div id="vouchers-content"></div>
         </div>
 
-        <!-- Services & Protection Grid (Spread Evenly in 2 Rows for all non-services tabs) -->
+        <!-- Services & Protection Grid -->
         <div id="services-grid-wrapper">
             <h3 class="section-title">Services & Protection</h3>
             <div class="services-grid" id="services-grid">
@@ -691,24 +702,24 @@
                 <label class="service-card checkbox-card" id="iphone-trade-in-card" style="display: none;">
                     <div class="pen-tick-box"></div>
                     <span>iPhone trade in</span>
-                    <input type="checkbox" id="iphoneTradeInCheck"> 
+                    <input type="checkbox" id="iphoneTradeInCheck" onchange="updateTradeInSheet()"> 
                 </label>
 
                 <label class="service-card checkbox-card" id="android-trade-in-card" style="display: none;">
                     <div class="pen-tick-box"></div>
                     <span>Android trade in</span>
-                    <input type="checkbox" id="androidTradeInCheck"> 
+                    <input type="checkbox" id="androidTradeInCheck" onchange="updateTradeInSheet()"> 
                 </label>
 
                 <label class="service-card checkbox-card" id="ios-trade-in-card" style="display: none;">
                     <div class="pen-tick-box"></div>
                     <span>iOS trade in</span>
-                    <input type="checkbox" id="iosTradeInCheck"> 
+                    <input type="checkbox" id="iosTradeInCheck" onchange="updateTradeInSheet()"> 
                 </label>
             </div>
         </div>
 
-        <!-- Notes & Promo Section (Hidden when Services selected) -->
+        <!-- Notes & Promo Section -->
         <div class="notes-section" id="notes-section">
             <h3 class="section-title" style="margin-bottom: 4px;">Additional Notes</h3>
             <div id="promo-banner" class="promo-banner"></div>
@@ -724,8 +735,12 @@
         <div class="tips-space" id="tips-space"></div>
     </div>
 
+    <!-- Third Page: Trade-In Preparation Guide Sheet -->
+    <div class="a4-sheet third-page" id="third-page">
+        <div id="third-page-content"></div>
+    </div>
+
     <script>
-        /* Exact PDF Voucher Sheet Data */
         const serviceVouchersData = {
             "Computer / Tablet": [
                 { name: "Data Transfer", code: "989422" },
@@ -767,7 +782,6 @@
             ]
         };
 
-        /* High-Precision Pure SVG Code 39 Barcode Generator */
         function generateCode39SVG(code) {
             const charWidths = {
                 '0': [1,1,1,2,2,1,2,1,1], '1': [2,1,1,1,1,1,1,1,2],
@@ -878,6 +892,108 @@
             services: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><path d="M45,15 L55,15 L58,25 A30,30 0 0,1 66,30 L76,25 L81,34 L73,42 A30,30 0 0,1 73,50 L81,58 L76,67 L66,62 A30,30 0 0,1 58,67 L55,77 L45,77 L42,67 A30,30 0 0,1 34,62 L24,67 L19,58 L27,50 A30,30 0 0,1 27,42 L19,34 L24,25 L34,30 A30,30 0 0,1 42,25 Z"/><circle cx="50" cy="46" r="10"/></svg>`
         };
 
+        function updateTradeInSheet() {
+            const deviceSelect = document.getElementById('device');
+            const selectedDevice = deviceSelect.value;
+            const thirdPage = document.getElementById('third-page');
+            const thirdPageContent = document.getElementById('third-page-content');
+
+            const iphoneChecked = document.getElementById('iphoneTradeInCheck')?.checked;
+            const iosChecked = document.getElementById('iosTradeInCheck')?.checked;
+            const androidChecked = document.getElementById('androidTradeInCheck')?.checked;
+
+            if (selectedDevice === 'services' || selectedDevice === 'none') {
+                thirdPage.style.display = 'none';
+                return;
+            }
+
+            if (iphoneChecked || iosChecked) {
+                thirdPage.style.display = 'flex';
+                thirdPageContent.innerHTML = `
+                    <header class="header" style="margin-bottom: 15px;">
+                        <div>
+                            <h1 style="font-size: 32px; margin: 0; color: var(--main-purple);">IOS / IPHONE PREPARATION GUIDE</h1>
+                            <p style="color: var(--main-purple); margin: 3px 0 0 0; font-weight: bold; font-size: 13px;">How to Prepare Your Device For Trade-In</p>
+                        </div>
+                    </header>
+                    <p style="font-size: 13px; color: #444; margin-bottom: 15px;">A clear, step-by-step reference sheet to prepare your device for trade-in, sale, repair, or factory reset.</p>
+
+                    <div style="background: #fff0f0; border-left: 4px solid #e53e3e; padding: 10px 14px; border-radius: 4px; margin-bottom: 15px; font-size: 12px; color: #9b2c2c;">
+                        <strong>Important Security Notice:</strong> Disabling these features removes Activation Lock and Location Tracking, leaving your device unprotected if lost or stolen. Only perform these steps if you are selling, trading in, giving away, or sending your device for service.
+                    </div>
+
+                    <div class="guide-step" style="margin-bottom: 15px; background: var(--light-purple); padding: 12px 16px; border-radius: 8px; border: 1px solid #d8b4fe;">
+                        <h3 style="margin: 0 0 8px 0; color: var(--main-purple); font-size: 16px;">1. Turn Off Stolen Device Protection (iOS 17.3 or later)</h3>
+                        <ol style="margin: 0 0 10px 20px; padding: 0; font-size: 13px; line-height: 1.5; color: #333;">
+                            <li>Open the <strong>Settings</strong> app on your iPhone or iPad.</li>
+                            <li>Scroll down and tap <strong>Face ID & Passcode</strong> (or <strong>Touch ID & Passcode</strong> on older models). Enter your passcode when prompted.</li>
+                            <li>Scroll down to <strong>Stolen Device Protection</strong> and tap to manage settings.</li>
+                            <li>Tap the switch to turn Stolen Device Protection <strong>OFF</strong> (the switch will turn grey).</li>
+                        </ol>
+                        <div style="font-size: 12px; color: var(--main-purple); background: #fff; padding: 8px 12px; border-radius: 4px; border: 1px dashed var(--main-purple);">
+                            <strong>Mandatory Security Delay Note:</strong> If you are away from a designated "Familiar Location" (such as your home or workplace), iOS will enforce a mandatory 1-hour security delay before this setting fully turns off. Once the delay elapses, return to this screen to complete deactivation.
+                        </div>
+                    </div>
+
+                    <div class="guide-step" style="margin-bottom: 15px; background: var(--light-purple); padding: 12px 16px; border-radius: 8px; border: 1px solid #d8b4fe;">
+                        <h3 style="margin: 0 0 8px 0; color: var(--main-purple); font-size: 16px;">2. Turn Off Find My iPhone / iPad & Activation Lock</h3>
+                        <ol style="margin: 0 0 0 20px; padding: 0; font-size: 13px; line-height: 1.5; color: #333;">
+                            <li>Return to the main page of the <strong>Settings</strong> app.</li>
+                            <li>Tap your <strong>Apple ID / Name banner</strong> at the very top of the settings menu.</li>
+                            <li>Tap <strong>Find My</strong>, then select <strong>Find My iPhone / iPad</strong> at the top of the screen.</li>
+                            <li>Tap the green toggle switch next to <strong>Find My iPhone / iPad</strong> to turn it off.</li>
+                            <li>When prompted, enter your <strong>Apple ID Password</strong> and tap <strong>Turn Off</strong> in the upper right corner. The toggle switch will turn grey to confirm it is disabled.</li>
+                        </ol>
+                    </div>
+
+                    <div class="guide-step" style="background: var(--light-purple); padding: 12px 16px; border-radius: 8px; border: 1px solid #d8b4fe;">
+                        <h3 style="margin: 0 0 8px 0; color: var(--main-purple); font-size: 16px;">3. WhatsApp Backup Guide (iPhone / iPad / iOS)</h3>
+                        <p style="font-size: 12px; font-weight: bold; color: var(--main-purple); margin: 0 0 8px 0;">Before You Start: Connect to Wi-Fi, ensure Cloud Account Signed In, check Free Storage Available, and Battery > 50%.</p>
+                        <ol style="margin: 0 0 10px 20px; padding: 0; font-size: 13px; line-height: 1.5; color: #333;">
+                            <li>Open <strong>Settings</strong> > <strong>[Your Name]</strong> > <strong>iCloud</strong> > Turn <strong>WhatsApp ON</strong>.</li>
+                            <li>Open <strong>WhatsApp</strong>, tap <strong>Settings</strong> tab at bottom.</li>
+                            <li>Navigate to <strong>Chats</strong> > <strong>Chat Backup</strong>.</li>
+                            <li>Tap <strong>Auto Backup</strong> to select daily or weekly schedule.</li>
+                            <li>Tap <strong>Back Up Now</strong> to execute a manual cloud backup.</li>
+                        </ol>
+                        <div style="font-size: 12px; color: #555; background: #fff; padding: 6px 10px; border-radius: 4px;">
+                            <strong>Requirement:</strong> Available iCloud space must be at least 2.05x the size of your backup.
+                        </div>
+                    </div>
+                `;
+            } else if (androidChecked) {
+                thirdPage.style.display = 'flex';
+                thirdPageContent.innerHTML = `
+                    <header class="header" style="margin-bottom: 15px;">
+                        <div>
+                            <h1 style="font-size: 32px; margin: 0; color: var(--main-purple);">ANDROID PREPARATION GUIDE</h1>
+                            <p style="color: var(--main-purple); margin: 3px 0 0 0; font-weight: bold; font-size: 13px;">WhatsApp Backup Step-by-Step Reference</p>
+                        </div>
+                    </header>
+                    <p style="font-size: 13px; color: #444; margin-bottom: 20px;">A clear, step-by-step reference sheet to back up your WhatsApp data before trade-in.</p>
+
+                    <div class="guide-step" style="background: var(--light-purple); padding: 16px 20px; border-radius: 8px; border: 1px solid #d8b4fe;">
+                        <h3 style="margin: 0 0 10px 0; color: var(--main-purple); font-size: 18px;">1. WhatsApp Backup (Google Drive)</h3>
+                        <div style="font-size: 12px; font-weight: bold; color: var(--main-purple); margin-bottom: 12px; background: #fff; padding: 8px 12px; border-radius: 4px; border: 1px dashed var(--main-purple);">
+                            Before You Start: Connect to Wi-Fi, ensure Cloud Account Signed In, check Free Storage Available, and Battery > 50%.
+                        </div>
+                        <ol style="margin: 0 0 15px 20px; padding: 0; font-size: 14px; line-height: 1.6; color: #333;">
+                            <li>Open <strong>WhatsApp</strong> and tap <strong>More options</strong> (three dots) at top right.</li>
+                            <li>Tap <strong>Settings</strong> > <strong>Chats</strong> > <strong>Chat backup</strong>.</li>
+                            <li>Select <strong>Google Account</strong> to link your storage account.</li>
+                            <li>Set <strong>Back up to Google Drive</strong> frequency (Daily/Weekly).</li>
+                            <li>Tap the green <strong>BACK UP</strong> button to start immediate backup.</li>
+                        </ol>
+                        <div style="font-size: 12px; color: #555; background: #fff; padding: 8px 12px; border-radius: 4px;">
+                            <strong>Tip:</strong> Turn on "Include videos" only if you have sufficient Google Drive storage.
+                        </div>
+                    </div>
+                `;
+            } else {
+                thirdPage.style.display = 'none';
+            }
+        }
+
         function handleDeviceChange() {
             const deviceSelect = document.getElementById('device');
             const iconContainer = document.getElementById('icon-container');
@@ -891,7 +1007,6 @@
             const mainTitle = document.getElementById('page-main-title');
             const subTitle = document.getElementById('page-sub-title');
 
-            // Individual Card Elements
             const officeCard = document.getElementById('office-card');
             const privacyCard = document.getElementById('privacy-card');
             const zaggCard = document.getElementById('zagg-card');
@@ -903,7 +1018,6 @@
             iconContainer.innerHTML = icons[selectedDevice] || '';
 
             if (selectedDevice === 'services') {
-                /* STRICT REQUIREMENTS: Hide EVERYTHING except Device Selection & Barcodes */
                 customerFields.style.display = 'none';
                 servicesGridWrapper.style.display = 'none';
                 notesSection.style.display = 'none';
@@ -913,7 +1027,6 @@
                 mainTitle.textContent = "Service Barcodes";
                 subTitle.textContent = "Store Voucher & Service Code Reference";
             } else {
-                /* Show normal setup sheet view */
                 customerFields.style.display = 'block';
                 servicesGridWrapper.style.display = 'block';
                 notesSection.style.display = 'flex';
@@ -928,7 +1041,6 @@
                     secondPage.style.display = 'flex';
                 }
 
-                // Reset default card visibility
                 if (officeCard) officeCard.style.display = 'flex';
                 if (privacyCard) privacyCard.style.display = 'flex';
                 if (zaggCard) zaggCard.style.display = 'flex';
@@ -937,7 +1049,6 @@
                 if (iosTradeInCard) iosTradeInCard.style.display = 'none';
                 if (imeiGroup) imeiGroup.style.display = 'none';
 
-                // Device specific adjustments to keep cards balanced in 2 rows
                 if (selectedDevice === 'mobile') {
                     if (officeCard) officeCard.style.display = 'none';
                     if (iphoneTradeInCard) iphoneTradeInCard.style.display = 'flex';
@@ -953,6 +1064,8 @@
                     if (zaggCard) zaggCard.style.display = 'none';
                 }
             }
+
+            updateTradeInSheet();
         }
 
         function clearAppData() {
