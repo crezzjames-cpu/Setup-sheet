@@ -229,12 +229,13 @@
             text-transform: uppercase;
         }
 
-        /* Services Grid */
+        /* Services Grid - Two Rows & Even Spread */
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
             margin-bottom: 20px;
+            width: 100%;
         }
 
         .service-card {
@@ -248,6 +249,9 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            flex: 1 1 calc(22% - 10px); /* Forces items into 2 rows and spreads them evenly */
+            min-width: 130px;
+            box-sizing: border-box;
         }
 
         .pen-tick-box {
@@ -400,7 +404,7 @@
             gap: 3px;
         }
 
-        /* Second & Third Page Styles */
+        /* Second Page Styles */
         .second-page {
             display: none;
             flex-direction: row;
@@ -439,35 +443,6 @@
             box-sizing: border-box;
         }
 
-        .tips-title {
-            color: var(--main-purple);
-            font-size: 36px;
-            text-transform: uppercase;
-            border-bottom: 3px solid var(--main-purple);
-            padding-bottom: 10px;
-            margin: 0 0 10px 0;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-
-        .tip-item {
-            font-size: 18px;
-            line-height: 1.5;
-            color: #333;
-            background: var(--light-purple);
-            padding: 15px 20px;
-            border-radius: 8px;
-            border-left: 5px solid var(--main-purple);
-            text-align: center;
-        }
-
-        .iphone-guide-page, .android-guide-page {
-            display: none;
-            flex-direction: column;
-            gap: 18px;
-            margin-top: 20px;
-        }
-
         /* Mobile Responsiveness */
         @media (max-width: 700px) {
             .app-toolbar {
@@ -486,7 +461,12 @@
                 grid-column: span 1;
             }
             .services-grid {
+                display: grid;
                 grid-template-columns: 1fr 1fr !important;
+            }
+            .service-card {
+                flex: unset;
+                width: 100%;
             }
             .voucher-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -570,7 +550,7 @@
         <div id="customer-fields-container">
             <form class="form-grid" id="setup-form" autocomplete="off">
                 <div class="form-group">
-                    <label for="colleagueName"> You were served by</label>
+                    <label for="colleagueName">You were served by</label>
                     <input type="text" id="colleagueName" placeholder="First Name" autocomplete="off">
                 </div>
 
@@ -662,7 +642,7 @@
             <div id="vouchers-content"></div>
         </div>
 
-        <!-- Services & Protection Dropdowns/Checkboxes (Hidden when Services selected) -->
+        <!-- Services & Protection Grid (Spread Evenly in 2 Rows for all non-services tabs) -->
         <div id="services-grid-wrapper">
             <h3 class="section-title">Services & Protection</h3>
             <div class="services-grid" id="services-grid">
@@ -873,7 +853,6 @@
         const zaggOptions = [
             {value: 'none', text: 'None'},
             {value: 'elite', text: 'Elite'},
-            {value: 'eco', text: 'Extreme'},
             {value: 'extreme', text: 'Extreme'},
             {value: 'privacy-matte', text: 'Privacy Matte'},
             {value: 'matte', text: 'Matte'}
@@ -912,6 +891,15 @@
             const mainTitle = document.getElementById('page-main-title');
             const subTitle = document.getElementById('page-sub-title');
 
+            // Individual Card Elements
+            const officeCard = document.getElementById('office-card');
+            const privacyCard = document.getElementById('privacy-card');
+            const zaggCard = document.getElementById('zagg-card');
+            const iphoneTradeInCard = document.getElementById('iphone-trade-in-card');
+            const androidTradeInCard = document.getElementById('android-trade-in-card');
+            const iosTradeInCard = document.getElementById('ios-trade-in-card');
+            const imeiGroup = document.getElementById('imei-group');
+
             iconContainer.innerHTML = icons[selectedDevice] || '';
 
             if (selectedDevice === 'services') {
@@ -938,6 +926,31 @@
                     secondPage.style.display = 'none';
                 } else {
                     secondPage.style.display = 'flex';
+                }
+
+                // Reset default card visibility
+                if (officeCard) officeCard.style.display = 'flex';
+                if (privacyCard) privacyCard.style.display = 'flex';
+                if (zaggCard) zaggCard.style.display = 'flex';
+                if (iphoneTradeInCard) iphoneTradeInCard.style.display = 'none';
+                if (androidTradeInCard) androidTradeInCard.style.display = 'none';
+                if (iosTradeInCard) iosTradeInCard.style.display = 'none';
+                if (imeiGroup) imeiGroup.style.display = 'none';
+
+                // Device specific adjustments to keep cards balanced in 2 rows
+                if (selectedDevice === 'mobile') {
+                    if (officeCard) officeCard.style.display = 'none';
+                    if (iphoneTradeInCard) iphoneTradeInCard.style.display = 'flex';
+                    if (androidTradeInCard) androidTradeInCard.style.display = 'flex';
+                    if (imeiGroup) imeiGroup.style.display = 'flex';
+                } else if (selectedDevice === 'tablet') {
+                    if (officeCard) officeCard.style.display = 'none';
+                    if (iosTradeInCard) iosTradeInCard.style.display = 'flex';
+                    if (androidTradeInCard) androidTradeInCard.style.display = 'flex';
+                    if (imeiGroup) imeiGroup.style.display = 'flex';
+                } else if (selectedDevice === 'aio' || selectedDevice === 'tower') {
+                    if (privacyCard) privacyCard.style.display = 'none';
+                    if (zaggCard) zaggCard.style.display = 'none';
                 }
             }
         }
