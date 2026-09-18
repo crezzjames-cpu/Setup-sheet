@@ -15,6 +15,8 @@
             --label-purple: #8a2be2;
             --white: #ffffff;
             --app-bg: #e2d5f8;
+            --poor-color: #d9534f;
+            --good-color: #2e7d32;
         }
 
         body {
@@ -404,19 +406,144 @@
             gap: 3px;
         }
 
-        /* Second Page Styles */
-        .second-page {
+        /* Second Page Flyer Sheet Styles */
+        .a4-sheet.second-page {
             display: none;
-            padding: 0 !important;
+            flex-direction: column;
             margin-top: 20px;
+            padding: 0;
             overflow: hidden;
         }
 
-        .second-page iframe {
-            width: 100%;
+        .flyer-container {
+            display: flex;
             height: 100%;
             min-height: 297mm;
-            border: none;
+            box-sizing: border-box;
+            flex-grow: 1;
+        }
+
+        /* Width of standard receipt (~80mm) */
+        .flyer-receipt-side {
+            width: 80mm;
+            background-color: var(--light-purple);
+            border-right: 2.5px dashed var(--main-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .vertical-receipt-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            color: #d8b4fe;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .flyer-main-content {
+            flex-grow: 1;
+            padding: 12mm 15mm 12mm 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .flyer-header-title {
+            color: var(--main-purple);
+            font-size: 30px;
+            font-weight: 800;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 0 0 16px 0;
+            padding-bottom: 6px;
+            border-bottom: 3px solid var(--main-purple);
+        }
+
+        .tips-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            flex-grow: 1;
+            justify-content: space-around;
+        }
+
+        .tip-card {
+            background-color: var(--light-purple);
+            border: 2px solid #d8b4fe;
+            border-radius: 10px;
+            padding: 14px 18px;
+            text-align: center;
+            font-size: 14.5px;
+            line-height: 1.5;
+            color: #222;
+            box-shadow: 0 3px 8px rgba(155, 81, 224, 0.12);
+        }
+
+        .survey-card {
+            background-color: var(--light-purple);
+            border: 2px solid #d8b4fe;
+            border-radius: 10px;
+            padding: 14px 18px;
+            box-shadow: 0 3px 8px rgba(155, 81, 224, 0.12);
+        }
+
+        .survey-intro-text {
+            margin: 0 0 10px 0;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            line-height: 1.35;
+        }
+
+        .survey-ratings-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 800;
+            font-size: 13px;
+            margin-bottom: 6px;
+            padding: 0 2px;
+        }
+
+        .poor-label {
+            color: var(--poor-color);
+        }
+
+        .good-label {
+            color: var(--good-color);
+        }
+
+        .survey-boxes-grid {
+            display: flex;
+            gap: 4px;
+        }
+
+        .survey-boxes-grid .s-box {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            font-weight: bold;
+            font-size: 13px;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .survey-boxes-grid .s-box.poor {
+            background-color: var(--poor-color);
+        }
+
+        .survey-boxes-grid .s-box.good {
+            background-color: var(--good-color);
         }
 
         /* Third Page (Trade-In Guide) Styles */
@@ -454,6 +581,23 @@
             .voucher-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
+            .flyer-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .flyer-receipt-side {
+                width: 100%;
+                height: 70px;
+                border-right: none;
+                border-bottom: 2.5px dashed var(--main-purple);
+            }
+            .vertical-receipt-text {
+                writing-mode: horizontal-tb;
+                transform: none;
+            }
+            .flyer-main-content {
+                padding: 15px;
+            }
         }
 
         /* Print Settings */
@@ -473,7 +617,7 @@
             }
             .a4-sheet {
                 box-shadow: none;
-                padding: 8mm 12mm !important;
+                padding: 12mm 15mm !important;
                 width: 210mm !important;
                 min-height: 297mm !important;
                 border-radius: 0;
@@ -485,6 +629,25 @@
             }
             .a4-sheet:last-child {
                 page-break-after: auto;
+            }
+            .flyer-container {
+                flex-direction: row !important;
+                min-height: 297mm !important;
+            }
+            .flyer-receipt-side {
+                width: 80mm !important;
+                background-color: var(--light-purple) !important;
+                border-right: 2.5px dashed var(--main-purple) !important;
+                border-bottom: none !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .vertical-receipt-text {
+                writing-mode: vertical-rl !important;
+                transform: rotate(180deg) !important;
+            }
+            .flyer-main-content {
+                padding: 12mm 15mm 12mm 25px !important;
             }
             .voucher-card {
                 break-inside: avoid;
@@ -706,9 +869,9 @@
         </div>
     </div>
 
-    <!-- Second Page: PDF Display Sheet -->
+    <!-- Second Page: Embedded Customer Flyer Sheet -->
     <div class="a4-sheet second-page" id="second-page">
-        <iframe id="second-page-pdf" src=""></iframe>
+        <div id="second-page-flyer-content" style="height: 100%;"></div>
     </div>
 
     <!-- Third Page: Trade-In Preparation Guide Sheet -->
@@ -758,8 +921,100 @@
             ]
         };
 
+        /* Mobile Flyer Content (Redesigned A4 Card Layout) */
+        const flyerMobileHTML = `
+            <div class="flyer-container">
+                <div class="flyer-receipt-side">
+                    <div class="vertical-receipt-text">ATTACH RECEIPT HERE</div>
+                </div>
+                <div class="flyer-main-content">
+                    <h2 class="flyer-header-title">HELPFUL TIPS</h2>
+                    <div class="tips-cards-container">
+                        <div class="tip-card">
+                            Please complete any back ups before coming in for your new device including <strong>WhatsApp</strong>
+                        </div>
+                        <div class="tip-card">
+                            Please ensure your current password for Google or Apple to ensure a password reset isn't required and find my device and theft protection is <strong>TURNED OFF!!!</strong>
+                        </div>
+                        <div class="tip-card">
+                            On your return please bring your bank card to help with any setup of antivirus or booking out of your phone
+                        </div>
+                        <div class="tip-card">
+                            Internet running slow at home or possibly over paying speak to an advisor to help find the best deal for you !!!
+                        </div>
+                        <div class="survey-card">
+                            <p class="survey-intro-text">Soon you will receive an email asking you to rate our service today, and this is how our survey rates our colleagues:</p>
+                            <div class="survey-ratings-header">
+                                <span class="poor-label">POOR</span>
+                                <span class="good-label">GOOD</span>
+                            </div>
+                            <div class="survey-boxes-grid">
+                                <div class="s-box poor">0</div>
+                                <div class="s-box poor">1</div>
+                                <div class="s-box poor">2</div>
+                                <div class="s-box poor">3</div>
+                                <div class="s-box poor">4</div>
+                                <div class="s-box poor">5</div>
+                                <div class="s-box poor">6</div>
+                                <div class="s-box poor">7</div>
+                                <div class="s-box poor">8</div>
+                                <div class="s-box good">9</div>
+                                <div class="s-box good">10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        /* Standard Flyer Content (Laptop, AIO, Tower, Tablet, etc.) matching exact card layout */
+        const flyerComputingHTML = `
+            <div class="flyer-container">
+                <div class="flyer-receipt-side">
+                    <div class="vertical-receipt-text">ATTACH RECEIPT HERE</div>
+                </div>
+                <div class="flyer-main-content">
+                    <h2 class="flyer-header-title">HELPFUL TIPS</h2>
+                    <div class="tips-cards-container">
+                        <div class="tip-card">
+                            Please check your passwords are correct and up-to-date before leaving
+                        </div>
+                        <div class="tip-card">
+                            On your return please bring your mobile phone and bank card information to help with any setup of antivirus
+                        </div>
+                        <div class="tip-card">
+                            Internet running slow at home or possibly over paying speak to an advisor to help find the best deal for you !!!
+                        </div>
+                        <div class="tip-card">
+                            <strong>Did you know you can check if your over paying on your mobile phone contract</strong><br><br>
+                            Texting the word <strong>INFO</strong> to <strong>85075</strong> is a free UK mobile service that tells you whether you are still in a minimum-term contract with your mobile provider and if you owe any early termination fees. Speak to one of our advisors today about beating your price !!!!
+                        </div>
+                        <div class="survey-card">
+                            <p class="survey-intro-text">Soon you will receive an email asking you to rate our service today, and this is how our survey rates our colleagues:</p>
+                            <div class="survey-ratings-header">
+                                <span class="poor-label">POOR</span>
+                                <span class="good-label">GOOD</span>
+                            </div>
+                            <div class="survey-boxes-grid">
+                                <div class="s-box poor">0</div>
+                                <div class="s-box poor">1</div>
+                                <div class="s-box poor">2</div>
+                                <div class="s-box poor">3</div>
+                                <div class="s-box poor">4</div>
+                                <div class="s-box poor">5</div>
+                                <div class="s-box poor">6</div>
+                                <div class="s-box poor">7</div>
+                                <div class="s-box poor">8</div>
+                                <div class="s-box good">9</div>
+                                <div class="s-box good">10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
         function generateCode39SVG(code) {
-            // Standard Code 39 Width Maps (1 = Narrow, 2 = Wide)
             const charWidths = {
                 '0': [1,1,1,1,2,2,2,1,1],
                 '1': [2,1,1,1,1,2,1,1,2],
@@ -787,7 +1042,14 @@
                     const w = widths[i] === 2 ? wide : narrow;
                     const isBar = (i % 2 === 0);
                     if (isBar) {
-                        bars += `<rect x="${x}" y="0" width="${w}" height="${height}" fill="#000000"/>`;                     }                     x += w;                 }                 x += narrow;             }              return `<svg viewBox="0 0 ${x + 10} ${height}" preserveAspectRatio="none" style="width: 100\%; height: 45px;">${bars}</svg>`;
+                        bars += `<rect x="${x}" y="0" width="${w}" height="${height}" fill="#000000"/>`;
+                    }
+                    x += w;
+                }
+                x += narrow;
+            }
+
+            return `<svg viewBox="0 0 ${x + 10} ${height}" preserveAspectRatio="none" style="width: 100\%; height: 45px;">${bars}</svg>`;
         }
 
         function renderVouchers() {
@@ -981,7 +1243,7 @@
             const notesSection = document.getElementById('notes-section');
             const vouchersContainer = document.getElementById('service-vouchers-container');
             const secondPage = document.getElementById('second-page');
-            const secondPdf = document.getElementById('second-page-pdf');
+            const flyerContent = document.getElementById('second-page-flyer-content');
             const mainTitle = document.getElementById('page-main-title');
             const subTitle = document.getElementById('page-sub-title');
 
@@ -995,18 +1257,19 @@
 
             iconContainer.innerHTML = icons[selectedDevice] || '';
 
-            // Handle Second Page PDF Logic
+            // Handle Page 2 Flyer logic routing to correct flyer HTML
             if (selectedDevice === 'mobile') {
                 secondPage.style.display = 'flex';
-                if (secondPdf) secondPdf.src = '1.pdf';
-            } else if (['laptop', 'aio', 'tower', 'tablet'].includes(selectedDevice)) {
+                flyerContent.innerHTML = flyerMobileHTML; 
+            } else if (selectedDevice !== 'none' && selectedDevice !== 'services') {
                 secondPage.style.display = 'flex';
-                if (secondPdf) secondPdf.src = '2.pdf';
+                flyerContent.innerHTML = flyerComputingHTML; 
             } else {
                 secondPage.style.display = 'none';
-                if (secondPdf) secondPdf.src = '';
+                flyerContent.innerHTML = '';
             }
 
+            // Handle specific UI logic for the 'services' tab versus everything else
             if (selectedDevice === 'services') {
                 if (headerColleague) headerColleague.style.display = 'none';
                 customerFields.style.display = 'block';
@@ -1064,6 +1327,7 @@
             }
         }
 
+        // Initialize display rules on load
         handleDeviceChange();
     </script>
 </body>
