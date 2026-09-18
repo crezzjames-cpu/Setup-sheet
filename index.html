@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setup Sheet App</title>
+    <title>Setup Sheet & Service Barcodes</title>
     <meta name="theme-color" content="#4b0082">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap" rel="stylesheet">
     <style>
         :root {
             --main-purple: #9b51e0;
@@ -90,235 +93,6 @@
             border-radius: 4px;
         }
 
-        /* Second Page Specific Styling */
-        .second-page {
-            display: none; /* Shown dynamically via JS */
-            flex-direction: row;
-            padding: 0 !important; /* Overriding to allow 90mm full height */
-            margin-top: 20px;
-        }
-
-        .receipt-space {
-            width: 90mm;
-            min-height: 100%;
-            border-right: 2px dashed var(--main-purple);
-            background-color: #faf5ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            box-sizing: border-box;
-        }
-
-        .receipt-text {
-            transform: rotate(-90deg);
-            color: var(--main-purple);
-            font-weight: bold;
-            font-size: 24px;
-            letter-spacing: 2px;
-            opacity: 0.3;
-            white-space: nowrap;
-        }
-
-        .tips-space {
-            flex: 1;
-            padding: 20mm 15mm;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            box-sizing: border-box;
-        }
-
-        .tips-title {
-            color: var(--main-purple);
-            font-size: 36px;
-            text-transform: uppercase;
-            border-bottom: 3px solid var(--main-purple);
-            padding-bottom: 10px;
-            margin: 0 0 10px 0;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-
-        .tip-item {
-            font-size: 18px;
-            line-height: 1.5;
-            color: #333;
-            background: var(--light-purple);
-            padding: 15px 20px;
-            border-radius: 8px;
-            border-left: 5px solid var(--main-purple);
-            text-align: center;
-        }
-
-        /* Survey Gradient Styles */
-        .survey-gradient-container {
-            margin-top: 15px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .survey-labels {
-            display: flex;
-            justify-content: space-between;
-            text-transform: uppercase;
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            padding: 0 5px;
-        }
-
-        .label-poor { color: #ef4444; }
-        .label-good { color: #22c55e; }
-
-        .survey-numbers {
-            display: flex;
-            width: 100%;
-            border-radius: 8px;
-            background: linear-gradient(to right, #ef4444 0%, #ef4444 65%, #f59e0b 82%, #22c55e 100%);
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .survey-numbers div {
-            flex: 1;
-            text-align: center;
-            padding: 8px 0;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-            border-right: 1px solid rgba(255, 255, 255, 0.4);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .survey-numbers div:last-child {
-            border-right: none;
-        }
-
-        /* Third Page (Guide) Styling */
-        .iphone-guide-page, .android-guide-page {
-            display: none;
-            flex-direction: column;
-            gap: 18px;
-            margin-top: 20px;
-        }
-
-        .guide-header {
-            text-align: center;
-            border-bottom: 3px solid var(--main-purple);
-            padding-bottom: 10px;
-        }
-
-        .guide-header h2 {
-            color: var(--main-purple);
-            font-size: 28px;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .guide-header h3 {
-            color: var(--label-purple);
-            font-size: 18px;
-            margin: 6px 0 2px 0;
-        }
-
-        .guide-subtext {
-            color: #555;
-            font-size: 13px;
-            margin: 4px 0 0 0;
-            font-style: italic;
-        }
-
-        .security-notice {
-            background-color: #fef2f2;
-            border-left: 5px solid #ef4444;
-            color: #991b1b;
-            padding: 12px 16px;
-            border-radius: 6px;
-            font-size: 13.5px;
-            line-height: 1.45;
-        }
-
-        .guide-section {
-            display: flex;
-            gap: 15px;
-            background-color: var(--light-purple);
-            border-radius: 8px;
-            padding: 16px;
-            border: 1.5px solid var(--main-purple);
-        }
-
-        .step-badge {
-            background-color: var(--main-purple);
-            color: var(--white);
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .step-content {
-            flex: 1;
-        }
-
-        .step-content h4 {
-            margin: 0 0 8px 0;
-            color: var(--main-purple);
-            font-size: 17px;
-        }
-
-        .step-content ol {
-            margin: 0;
-            padding-left: 20px;
-        }
-
-        .step-content li {
-            margin-bottom: 6px;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.4;
-        }
-
-        /* Separate WhatsApp Guide Box Styling */
-        .whatsapp-guide-box {
-            background-color: var(--light-purple);
-            border-radius: 8px;
-            padding: 16px;
-            border: 1.5px solid var(--main-purple);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .whatsapp-guide-header h4 {
-            margin: 0 0 8px 0;
-            color: var(--main-purple);
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid #d8b4fe;
-            padding-bottom: 6px;
-        }
-
-        .delay-note {
-            margin-top: 10px;
-            background-color: #fffbe2;
-            border: 1px solid #f59e0b;
-            border-radius: 6px;
-            padding: 10px;
-            font-size: 13px;
-            color: #854d0e;
-            line-height: 1.4;
-        }
-
         /* Header Section */
         .header {
             display: flex;
@@ -332,51 +106,23 @@
         .header h1 {
             color: var(--main-purple);
             margin: 0;
-            font-size: 46px;
+            font-size: 42px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .header-center {
-            flex: 1;
-            max-width: 380px;
-            margin: 0 15px;
+        .device-selector-container {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-        }
-
-        .header-center label {
-            color: var(--label-purple);
-            font-weight: bold;
-            font-size: 14px;
-            margin: 0;
-        }
-
-        .header-center input {
+            gap: 5px;
+            max-width: 300px;
             width: 100%;
-            padding: 8px 12px;
-            border: 2px solid #d8b4fe;
-            border-radius: 6px;
-            font-size: 40px;
-            font-weight: bold;
-            box-sizing: border-box;
-            color: #333;
-            background-color: var(--white);
-            transition: border-color 0.2s;
-            font-family: inherit;
-        }
-
-        .header-center input:focus {
-            outline: none;
-            border-color: var(--main-purple);
-            background-color: var(--light-purple);
         }
 
         /* Device Icon Container */
         .device-icon-container {
-            width: 85px;
-            height: 85px;
+            width: 75px;
+            height: 75px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -473,10 +219,6 @@
             background-color: var(--light-purple);
         }
 
-        textarea {
-            resize: vertical;
-        }
-
         /* Section Titles */
         .section-title {
             color: var(--main-purple);
@@ -508,7 +250,6 @@
             text-align: center;
         }
 
-        /* Pen Tick Square */
         .pen-tick-box {
             width: 16px;
             height: 16px;
@@ -556,7 +297,89 @@
             text-align: center;
         }
 
-        /* Promo Banner */
+        /* Service Barcode Section Styling */
+        .service-vouchers-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+        }
+
+        .voucher-cat-title {
+            color: var(--main-purple);
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--main-purple);
+            padding-bottom: 4px;
+            margin: 10px 0 6px 0;
+        }
+
+        .voucher-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .voucher-card {
+            background: var(--white);
+            border: 2px solid var(--main-purple);
+            border-radius: 8px;
+            padding: 10px 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .voucher-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(155, 81, 224, 0.25);
+            background: #faf5ff;
+        }
+
+        .voucher-name {
+            font-weight: bold;
+            font-size: 13px;
+            color: #222;
+            margin-bottom: 6px;
+            min-height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .barcode-svg-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 4px 0;
+            background: #ffffff;
+            padding: 4px 0;
+        }
+
+        .voucher-code {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--main-purple);
+            letter-spacing: 2px;
+            font-family: monospace;
+            background: var(--light-purple);
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-top: 4px;
+            width: calc(100% - 16px);
+            box-sizing: border-box;
+        }
+
+        /* Promo Banner & Notes */
         .promo-banner {
             background-color: var(--light-purple);
             border: 1.5px dashed var(--main-purple);
@@ -571,19 +394,78 @@
             display: none;
         }
 
-        .promo-banner p {
-            margin: 0 0 2px 0;
-        }
-
-        .promo-banner p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Notes Section */
         .notes-section {
             display: flex;
             flex-direction: column;
             gap: 3px;
+        }
+
+        /* Second & Third Page Styles */
+        .second-page {
+            display: none;
+            flex-direction: row;
+            padding: 0 !important;
+            margin-top: 20px;
+        }
+
+        .receipt-space {
+            width: 90mm;
+            min-height: 100%;
+            border-right: 2px dashed var(--main-purple);
+            background-color: #faf5ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        .receipt-text {
+            transform: rotate(-90deg);
+            color: var(--main-purple);
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 2px;
+            opacity: 0.3;
+            white-space: nowrap;
+        }
+
+        .tips-space {
+            flex: 1;
+            padding: 20mm 15mm;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+
+        .tips-title {
+            color: var(--main-purple);
+            font-size: 36px;
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--main-purple);
+            padding-bottom: 10px;
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .tip-item {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
+            background: var(--light-purple);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--main-purple);
+            text-align: center;
+        }
+
+        .iphone-guide-page, .android-guide-page {
+            display: none;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 20px;
         }
 
         /* Mobile Responsiveness */
@@ -592,19 +474,10 @@
                 flex-direction: column;
                 gap: 10px;
             }
-            .toolbar-group {
-                width: 100%;
-                justify-content: center;
-            }
             .header {
                 flex-direction: column;
                 gap: 10px;
                 align-items: flex-start;
-            }
-            .header-center {
-                max-width: 100%;
-                margin: 0;
-                width: 100%;
             }
             .form-grid {
                 grid-template-columns: 1fr;
@@ -615,29 +488,8 @@
             .services-grid {
                 grid-template-columns: 1fr 1fr !important;
             }
-            .service-card {
-                grid-column: span 1 !important;
-            }
-            .second-page {
-                flex-direction: column;
-            }
-            .receipt-space {
-                width: 100%;
-                min-height: 50px;
-                border-right: none;
-                border-bottom: 2px dashed var(--main-purple);
-            }
-            .receipt-text {
-                transform: none;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .services-grid {
-                grid-template-columns: 1fr !important;
-            }
-            .service-card {
-                grid-column: span 1 !important;
+            .voucher-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
         }
 
@@ -648,241 +500,32 @@
         }
 
         @media print {
-            /* Force empty text fields and unselected dropdowns to render visually blank */
-            ::placeholder,
-            ::-webkit-input-placeholder,
-            :-ms-input-placeholder {
-                color: transparent !important;
-                -webkit-text-fill-color: transparent !important;
-                opacity: 0 !important;
-            }
-
-            .print-transparent-text {
-                color: transparent !important;
-                -webkit-text-fill-color: transparent !important;
-            }
-
             body {
                 background: none;
                 padding: 0;
                 margin: 0;
-                align-items: flex-start;
             }
             .app-toolbar {
                 display: none !important;
             }
             .a4-sheet {
                 box-shadow: none;
-                padding: 5mm 10mm !important;
+                padding: 8mm 12mm !important;
                 width: 210mm !important;
-                height: 297mm !important;
-                max-height: 297mm !important;
-                overflow: hidden !important;
-                box-sizing: border-box !important;
+                min-height: 297mm !important;
                 border-radius: 0;
                 margin: 0;
             }
-            
-            /* Second page print rules */
-            .second-page {
-                padding: 0 !important;
-                margin-top: 0 !important;
-                page-break-before: always !important;
-                break-before: page !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            
-            .receipt-space {
-                width: 90mm !important;
-                border-right: 2px dashed var(--main-purple) !important;
-                background-color: #faf5ff !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .tips-space {
-                padding: 15mm !important;
-            }
-
-            .tip-item {
-                font-size: 16px !important;
-                padding: 12px 15px !important;
-                background-color: var(--light-purple) !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            /* Third page print rules */
-            .iphone-guide-page, .android-guide-page {
-                margin-top: 0 !important;
-                padding: 10mm 15mm !important;
-                page-break-before: always !important;
-                break-before: page !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .guide-section {
-                background-color: var(--light-purple) !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .whatsapp-guide-box {
-                background-color: var(--light-purple) !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .security-notice {
-                background-color: #fef2f2 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .delay-note {
-                background-color: #fffbe2 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .step-badge {
-                background-color: var(--main-purple) !important;
-                color: white !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            /* Survey print rules */
-            .survey-numbers {
-                background: linear-gradient(to right, #ef4444 0%, #ef4444 65%, #f59e0b 82%, #22c55e 100%) !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            
-            .survey-numbers div {
-                color: white !important;
-                padding: 6px 0 !important;
-                font-size: 12px !important;
-                border-right: 1px solid rgba(255, 255, 255, 0.4) !important;
-            }
-
-            .label-poor { color: #ef4444 !important; }
-            .label-good { color: #22c55e !important; }
-
-            .header {
-                padding-bottom: 2mm !important;
-                margin-bottom: 3mm !important;
-                align-items: center !important;
-            }
-            .header h1 {
-                font-size: 26px !important;
-            }
-            .header-center {
-                max-width: 200px !important;
-                margin: 0 8px !important;
-            }
-            .header-center label {
-                font-size: 10px !important;
-            }
-            .header-center input {
-                padding: 3px 6px !important;
-                font-size: 24px !important;
-                font-weight: bold !important;
-                border: 2px solid var(--main-purple) !important;
-            }
-            .device-icon-container {
-                width: 55px !important;
-                height: 55px !important;
-            }
-            .form-grid {
-                gap: 2px 8px !important;
-                margin-bottom: 3mm !important;
-            }
-            label {
-                font-size: 10px !important;
-            }
-            input[type="text"],
-            input[type="email"],
-            select,
-            textarea {
-                padding: 2px 4px !important;
-                font-size: 10.5px !important;
-                border: 2px solid var(--main-purple) !important;
-            }
-
-            /* Print tweaks for Date of Birth */
-            .dob-container input#dobDay,
-            .dob-container input#dobMonth {
-                width: 38px !important;
-            }
-            .dob-container input#dobYear {
-                width: 58px !important;
-            }
-            .dob-separator {
-                font-size: 13px !important;
-                color: var(--main-purple) !important;
-            }
-
-            textarea#address {
-                height: auto !important;
-                min-height: 6.2em !important;
-                line-height: 1.25 !important;
-            }
-            .section-title {
-                font-size: 11.5px !important;
-                margin: 0 0 3px 0 !important;
-                padding-bottom: 1px !important;
-            }
-            .services-grid {
-                gap: 4px !important;
-                margin-bottom: 3mm !important;
-            }
-            .service-card {
-                padding: 2px !important;
-                gap: 2px !important;
-                border: 2px solid var(--main-purple) !important;
-                background-color: var(--light-purple) !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            .pen-tick-box {
-                width: 12px !important;
-                height: 12px !important;
+            .voucher-card {
+                break-inside: avoid;
                 border: 1.5px solid var(--main-purple) !important;
-                background-color: var(--white) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .service-card label, .service-card span {
-                font-size: 10px !important;
-            }
-            .service-card select {
-                padding: 1px !important;
-                font-size: 10px !important;
-            }
-            .service-card.checkbox-card input[type="checkbox"] {
-                width: 12px;
-                height: 12px;
-            }
-            .promo-banner {
-                padding: 2px 5px !important;
-                font-size: 9px !important;
-                margin-bottom: 2px !important;
-                border: 1.5px dashed var(--main-purple) !important;
+            .voucher-code {
                 background-color: var(--light-purple) !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
-            }
-            textarea#notes {
-                height: 110px !important;
-            }
-            svg {
-                width: 50px !important;
-                height: 50px !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
             }
         }
     </style>
@@ -895,26 +538,19 @@
             <button class="app-btn" onclick="clearAppData()">🗑️ Clear Form</button>
         </div>
         <div class="toolbar-group">
-            <button class="app-btn primary" onclick="triggerPrint()">🖨️ Print</button>
+            <button class="app-btn primary" onclick="window.print()">🖨️ Print</button>
         </div>
     </div>
 
-    <!-- First Page: Setup Sheet -->
+    <!-- Main Page: Setup Sheet / Services Barcodes -->
     <div class="a4-sheet">
         <header class="header">
             <div>
-                <h1>Setup Sheet</h1>
-                <p style="color: var(--main-purple); margin: 3px 0 0 0; font-weight: bold; font-size: 13px;">Device Configuration & Services</p>
+                <h1 id="page-main-title">Setup Sheet</h1>
+                <p id="page-sub-title" style="color: var(--main-purple); margin: 3px 0 0 0; font-weight: bold; font-size: 13px;">Device Configuration & Services</p>
             </div>
-            <div class="header-center">
-                <label for="colleagueName">You were served by</label>
-                <input type="text" id="colleagueName" placeholder="First Name" autocomplete="off">
-            </div>
-            <div class="device-icon-container" id="icon-container"></div>
-        </header>
-
-        <form class="form-grid" id="setup-form" autocomplete="off">
-            <div class="form-group">
+            
+            <div class="device-selector-container">
                 <label for="device">Device Type</label>
                 <select id="device" onchange="handleDeviceChange()">
                     <option value="none">-- Select --</option>
@@ -923,162 +559,181 @@
                     <option value="tower">Tower</option>
                     <option value="mobile">Mobile phone</option>
                     <option value="tablet">Tablet</option>
+                    <option value="services">Services</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="customerName">Customer Name</label>
-                <input type="text" id="customerName" placeholder="Enter full name" autocomplete="off">
-            </div>
+            <div class="device-icon-container" id="icon-container"></div>
+        </header>
 
-            <div class="form-group">
-                <label for="item">Item</label>
-                <input type="text" id="item" placeholder="Enter item" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label for="productCode">Product Code</label>
-                <input type="text" id="productCode" placeholder="e.g. LAP123" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label for="receiptCur">Receipt / CUR</label>
-                <input type="text" id="receiptCur" placeholder="Enter Receipt / CUR" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label for="medics">Medics</label>
-                <input type="text" id="medics" placeholder="Enter Medics" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label for="contactNumber">Best Contact Number</label>
-                <input type="text" id="contactNumber" placeholder="Enter phone number" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="Enter email address" autocomplete="email">
-            </div>
-
-            <div class="form-group">
-                <label for="altEmail">Alternative Email Address</label>
-                <input type="email" id="altEmail" placeholder="Enter alternative email address" autocomplete="email">
-            </div>
-
-            <div class="form-group dob-group">
-                <label>Date of Birth <span style="font-weight: normal; font-size: 0.9em;">(only needed for new account creation)</span></label>
-                <div class="dob-container">
-                    <input type="text" id="dobDay" placeholder="DD" maxlength="2" autocomplete="off" aria-label="Day">
-                    <span class="dob-separator">/</span>
-                    <input type="text" id="dobMonth" placeholder="MM" maxlength="2" autocomplete="off" aria-label="Month">
-                    <span class="dob-separator">/</span>
-                    <input type="text" id="dobYear" placeholder="YYYY" maxlength="4" autocomplete="off" aria-label="Year">
+        <!-- Customer & Device Details Form (Hidden when Services selected) -->
+        <div id="customer-fields-container">
+            <form class="form-grid" id="setup-form" autocomplete="off">
+                <div class="form-group">
+                    <label for="colleagueName"> You were served by</label>
+                    <input type="text" id="colleagueName" placeholder="First Name" autocomplete="off">
                 </div>
-            </div>
 
-            <div class="form-group full-width">
-                <label for="address">Full Address</label>
-                <textarea id="address" rows="6" placeholder="Enter customer's full address" autocomplete="off"></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" id="customerName" placeholder="Enter full name" autocomplete="off">
+                </div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="text" id="password" placeholder="Account Password" autocomplete="new-password">
-            </div>
+                <div class="form-group">
+                    <label for="item">Item</label>
+                    <input type="text" id="item" placeholder="Enter item" autocomplete="off">
+                </div>
 
-            <div class="form-group">
-                <label for="pin">Pin</label>
-                <input type="text" id="pin" placeholder="Device PIN" autocomplete="new-password">
-            </div>
+                <div class="form-group">
+                    <label for="productCode">Product Code</label>
+                    <input type="text" id="productCode" placeholder="e.g. LAP123" autocomplete="off">
+                </div>
 
-            <div class="form-group" id="imei-group" style="display: none;">
-                <label for="imei">IMEI number (Trade in)</label>
-                <input type="text" id="imei" placeholder="Enter IMEI number" autocomplete="off">
-            </div>
+                <div class="form-group">
+                    <label for="receiptCur">Receipt / CUR</label>
+                    <input type="text" id="receiptCur" placeholder="Enter Receipt / CUR" autocomplete="off">
+                </div>
 
-            <div class="form-group" id="preorder-group" style="display: none;">
-                <label for="preorder">Pre-order</label>
-                <select id="preorder">
-                    <option value="">-- Select --</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="medics">Medics</label>
+                    <input type="text" id="medics" placeholder="Enter Medics" autocomplete="off">
+                </div>
 
-        <h3 class="section-title">Services & Protection</h3>
-        
-        <div class="services-grid" id="services-grid">
-            <div class="service-card" id="antivirus-card">
-                <div class="pen-tick-box"></div>
-                <label for="antivirus">Anti-virus</label>
-                <select id="antivirus"></select>
-            </div>
+                <div class="form-group">
+                    <label for="contactNumber">Best Contact Number</label>
+                    <input type="text" id="contactNumber" placeholder="Enter phone number" autocomplete="off">
+                </div>
 
-            <div class="service-card" id="office-card">
-                <div class="pen-tick-box"></div>
-                <label for="office">Office</label>
-                <select id="office"></select>
-            </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter email address" autocomplete="email">
+                </div>
 
-            <div class="service-card" id="privacy-card">
-                <div class="pen-tick-box"></div>
-                <label for="privacyGuard">Privacy Guard</label>
-                <select id="privacyGuard"></select>
-            </div>
+                <div class="form-group">
+                    <label for="altEmail">Alternative Email Address</label>
+                    <input type="email" id="altEmail" placeholder="Enter alternative email address" autocomplete="email">
+                </div>
 
-            <div class="service-card" id="zagg-card">
-                <div class="pen-tick-box"></div>
-                <label for="zagg">Zagg Screen Protector</label>
-                <select id="zagg"></select>
-            </div>
+                <div class="form-group dob-group">
+                    <label>Date of Birth <span style="font-weight: normal; font-size: 0.9em;">(for account creation)</span></label>
+                    <div class="dob-container">
+                        <input type="text" id="dobDay" placeholder="DD" maxlength="2" autocomplete="off">
+                        <span class="dob-separator">/</span>
+                        <input type="text" id="dobMonth" placeholder="MM" maxlength="2" autocomplete="off">
+                        <span class="dob-separator">/</span>
+                        <input type="text" id="dobYear" placeholder="YYYY" maxlength="4" autocomplete="off">
+                    </div>
+                </div>
 
-            <label class="service-card checkbox-card" id="cloud-card">
-                <div class="pen-tick-box"></div>
-                <span>Cloud Storage</span>
-                <input type="checkbox" id="cloudCheck"> 
-            </label>
+                <div class="form-group full-width">
+                    <label for="address">Full Address</label>
+                    <textarea id="address" rows="4" placeholder="Enter customer's full address" autocomplete="off"></textarea>
+                </div>
 
-            <label class="service-card checkbox-card" id="vpn-card">
-                <div class="pen-tick-box"></div>
-                <span>VPN Service</span>
-                <input type="checkbox" id="vpnCheck"> 
-            </label>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="text" id="password" placeholder="Account Password" autocomplete="new-password">
+                </div>
 
-            <label class="service-card checkbox-card" id="data-card">
-                <div class="pen-tick-box"></div>
-                <span>Data Transfer</span>
-                <input type="checkbox" id="dataCheck"> 
-            </label>
+                <div class="form-group">
+                    <label for="pin">Pin</label>
+                    <input type="text" id="pin" placeholder="Device PIN" autocomplete="new-password">
+                </div>
 
-            <label class="service-card checkbox-card" id="iphone-trade-in-card" style="display: none;">
-                <div class="pen-tick-box"></div>
-                <span>iPhone trade in</span>
-                <input type="checkbox" id="iphoneTradeInCheck" onchange="toggleTradeInGuides()"> 
-            </label>
+                <div class="form-group" id="imei-group" style="display: none;">
+                    <label for="imei">IMEI number (Trade in)</label>
+                    <input type="text" id="imei" placeholder="Enter IMEI number" autocomplete="off">
+                </div>
 
-            <!-- Android Trade In Box -->
-            <label class="service-card checkbox-card" id="android-trade-in-card" style="display: none;">
-                <div class="pen-tick-box"></div>
-                <span>Android trade in</span>
-                <input type="checkbox" id="androidTradeInCheck" onchange="toggleTradeInGuides()"> 
-            </label>
-
-            <!-- iOS Trade In Box for Tablet -->
-            <label class="service-card checkbox-card" id="ios-trade-in-card" style="display: none;">
-                <div class="pen-tick-box"></div>
-                <span>iOS trade in</span>
-                <input type="checkbox" id="iosTradeInCheck" onchange="toggleTradeInGuides()"> 
-            </label>
+                <div class="form-group" id="preorder-group" style="display: none;">
+                    <label for="preorder">Pre-order</label>
+                    <select id="preorder">
+                        <option value="">-- Select --</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+            </form>
         </div>
 
-        <div class="notes-section">
+        <!-- Service Barcode Sheet Container (Sole focus when Services selected) -->
+        <div class="service-vouchers-container" id="service-vouchers-container" style="display: none;">
+            <h3 class="section-title" style="margin-bottom: 2px;">Service Codes & Barcodes Reference</h3>
+            <div id="vouchers-content"></div>
+        </div>
+
+        <!-- Services & Protection Dropdowns/Checkboxes (Hidden when Services selected) -->
+        <div id="services-grid-wrapper">
+            <h3 class="section-title">Services & Protection</h3>
+            <div class="services-grid" id="services-grid">
+                <div class="service-card" id="antivirus-card">
+                    <div class="pen-tick-box"></div>
+                    <label for="antivirus">Anti-virus</label>
+                    <select id="antivirus"></select>
+                </div>
+
+                <div class="service-card" id="office-card">
+                    <div class="pen-tick-box"></div>
+                    <label for="office">Office</label>
+                    <select id="office"></select>
+                </div>
+
+                <div class="service-card" id="privacy-card">
+                    <div class="pen-tick-box"></div>
+                    <label for="privacyGuard">Privacy Guard</label>
+                    <select id="privacyGuard"></select>
+                </div>
+
+                <div class="service-card" id="zagg-card">
+                    <div class="pen-tick-box"></div>
+                    <label for="zagg">Zagg Screen Protector</label>
+                    <select id="zagg"></select>
+                </div>
+
+                <label class="service-card checkbox-card" id="cloud-card">
+                    <div class="pen-tick-box"></div>
+                    <span>Cloud Storage</span>
+                    <input type="checkbox" id="cloudCheck"> 
+                </label>
+
+                <label class="service-card checkbox-card" id="vpn-card">
+                    <div class="pen-tick-box"></div>
+                    <span>VPN Service</span>
+                    <input type="checkbox" id="vpnCheck"> 
+                </label>
+
+                <label class="service-card checkbox-card" id="data-card">
+                    <div class="pen-tick-box"></div>
+                    <span>Data Transfer</span>
+                    <input type="checkbox" id="dataCheck"> 
+                </label>
+
+                <label class="service-card checkbox-card" id="iphone-trade-in-card" style="display: none;">
+                    <div class="pen-tick-box"></div>
+                    <span>iPhone trade in</span>
+                    <input type="checkbox" id="iphoneTradeInCheck"> 
+                </label>
+
+                <label class="service-card checkbox-card" id="android-trade-in-card" style="display: none;">
+                    <div class="pen-tick-box"></div>
+                    <span>Android trade in</span>
+                    <input type="checkbox" id="androidTradeInCheck"> 
+                </label>
+
+                <label class="service-card checkbox-card" id="ios-trade-in-card" style="display: none;">
+                    <div class="pen-tick-box"></div>
+                    <span>iOS trade in</span>
+                    <input type="checkbox" id="iosTradeInCheck"> 
+                </label>
+            </div>
+        </div>
+
+        <!-- Notes & Promo Section (Hidden when Services selected) -->
+        <div class="notes-section" id="notes-section">
             <h3 class="section-title" style="margin-bottom: 4px;">Additional Notes</h3>
             <div id="promo-banner" class="promo-banner"></div>
-            <textarea id="notes" rows="20" placeholder="Enter setup notes, specific customer requests, or additional information here..." autocomplete="off"></textarea>
+            <textarea id="notes" rows="6" placeholder="Enter setup notes, specific customer requests, or additional information here..." autocomplete="off"></textarea>
         </div>
-
     </div>
 
     <!-- Second Page: Helpful Tips & Receipt -->
@@ -1086,103 +741,122 @@
         <div class="receipt-space">
             <span class="receipt-text">ATTACH RECEIPT HERE</span>
         </div>
-        <div class="tips-space" id="tips-space">
-            <!-- Tips inserted here by JavaScript -->
-        </div>
-    </div>
-
-    <!-- Third Page (Apple): iOS / iPhone Preparation Guide -->
-    <div class="a4-sheet iphone-guide-page" id="iphone-guide-page">
-        <div class="guide-header">
-            <h2>IOS / IPHONE PREPARATION GUIDE</h2>
-            <h3>How to Prepare Your Device For Trade-In</h3>
-            <p class="guide-subtext">A clear, step-by-step reference sheet to prepare your device for trade-in, sale, repair, or factory reset</p>
-        </div>
-
-        <div class="security-notice">
-            <strong>Important Security Notice:</strong>
-            Disabling these features removes Activation Lock and Location Tracking, leaving your device unprotected if lost or stolen. Only perform these steps if you are selling, trading in, giving away, or sending your device for service.
-        </div>
-
-        <div class="guide-section">
-            <div class="step-badge">1</div>
-            <div class="step-content">
-                <h4>Turn Off Stolen Device Protection (iOS 17.3 or later)</h4>
-                <ol>
-                    <li>Open the <strong>Settings</strong> app on your iPhone or iPad.</li>
-                    <li>Scroll down and tap <strong>Face ID & Passcode</strong> (or <strong>Touch ID & Passcode</strong> on older models). Enter your passcode when prompted.</li>
-                    <li>Scroll down to <strong>Stolen Device Protection</strong> and tap to manage settings.</li>
-                    <li>Tap the switch to turn Stolen Device Protection <strong>OFF</strong> (the switch will turn grey).</li>
-                </ol>
-                <div class="delay-note">
-                    <strong>Mandatory Security Delay Note:</strong> If you are away from a designated "Familiar Location" (such as your home or workplace), iOS will enforce a mandatory 1-hour security delay before this setting fully turns off. Once the delay elapses, return to this screen to complete deactivation.
-                </div>
-            </div>
-        </div>
-
-        <div class="guide-section">
-            <div class="step-badge">2</div>
-            <div class="step-content">
-                <h4>Turn Off Find My iPhone / iPad & Activation Lock</h4>
-                <ol>
-                    <li>Return to the main page of the <strong>Settings</strong> app.</li>
-                    <li>Tap your <strong>Apple ID / Name banner</strong> at the very top of the settings menu.</li>
-                    <li>Tap <strong>Find My</strong>, then select <strong>Find My iPhone / iPad</strong> at the top of the screen.</li>
-                    <li>Tap the green toggle switch next to <strong>Find My iPhone / iPad</strong> to turn it off.</li>
-                    <li>When prompted, enter your <strong>Apple ID Password</strong> and tap <strong>Turn Off</strong> in the upper right corner. The toggle switch will turn grey to confirm it is disabled.</li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- Separate WhatsApp Backup Section (Non-Step Heading) -->
-        <div class="whatsapp-guide-box" id="whatsapp-guide-box">
-            <div class="whatsapp-guide-header">
-                <h4>💬 WhatsApp Backup Guide (iPhone / iPad / iOS)</h4>
-            </div>
-            <p style="margin: 0 0 5px; font-size: 13px; color: #555;"><strong>Before You Start:</strong> Connect to Wi-Fi, ensure Cloud Account Signed In, check Free Storage Available, and Battery &gt; 50%.</p>
-            <ol style="margin: 0; padding-left: 20px;">
-                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Open Settings &gt; [Your Name] &gt; iCloud &gt; Turn WhatsApp <strong>ON</strong>.</li>
-                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Open WhatsApp, tap <strong>Settings</strong> tab at bottom.</li>
-                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Navigate to <strong>Chats &gt; Chat Backup</strong>.</li>
-                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Tap <strong>Auto Backup</strong> to select daily or weekly schedule.</li>
-                <li style="margin-bottom: 6px; font-size: 14px; color: #333; line-height: 1.4;">Tap <strong>Back Up Now</strong> to execute a manual cloud backup.</li>
-            </ol>
-            <div class="delay-note">
-                <strong>Requirement:</strong> Available iCloud space must be at least 2.05x the size of your backup.
-            </div>
-        </div>
-    </div>
-
-    <!-- Third Page (Android): Android Preparation Guide -->
-    <div class="a4-sheet android-guide-page" id="android-guide-page">
-        <div class="guide-header">
-            <h2>ANDROID PREPARATION GUIDE</h2>
-            <h3>WhatsApp Backup Step-by-Step Reference</h3>
-            <p class="guide-subtext">A clear, step-by-step reference sheet to back up your WhatsApp data before trade-in</p>
-        </div>
-
-        <div class="guide-section">
-            <div class="step-badge">1</div>
-            <div class="step-content">
-                <h4>WhatsApp Backup (Google Drive)</h4>
-                <p style="margin: 0 0 5px; font-size: 13px; color: #555;"><strong>Before You Start:</strong> Connect to Wi-Fi, ensure Cloud Account Signed In, check Free Storage Available, and Battery &gt; 50%.</p>
-                <ol>
-                    <li>Open WhatsApp and tap <strong>More options</strong> (three dots) at top right.</li>
-                    <li>Tap <strong>Settings &gt; Chats &gt; Chat backup</strong>.</li>
-                    <li>Select <strong>Google Account</strong> to link your storage account.</li>
-                    <li>Set Back up to Google Drive frequency (Daily/Weekly).</li>
-                    <li>Tap the green <strong>BACK UP</strong> button to start immediate backup.</li>
-                </ol>
-                <div class="delay-note">
-                    <strong>Tip:</strong> Turn on "Include videos" only if you have sufficient Google Drive storage.
-                </div>
-            </div>
-        </div>
+        <div class="tips-space" id="tips-space"></div>
     </div>
 
     <script>
+        /* Exact PDF Voucher Sheet Data */
+        const serviceVouchersData = {
+            "Computer / Tablet": [
+                { name: "Data Transfer", code: "989422" },
+                { name: "Data backup", code: "063323" },
+                { name: "Computer Setup", code: "261530" },
+                { name: "Tablet Setup", code: "057472" },
+                { name: "Laptop Privacy Zagg", code: "770150" },
+                { name: "Tablet Elite Zagg", code: "724329" }
+            ],
+            "Mobile": [
+                { name: "Mobile Setup", code: "085937" },
+                { name: "Elite Zagg", code: "722471" },
+                { name: "Extreme Zagg", code: "777610" },
+                { name: "Ultra Eco Zagg", code: "732811" },
+                { name: "Ultra Matt Zagg", code: "760843" },
+                { name: "Privacy Zagg", code: "782725" },
+                { name: "Smart Watch Zagg", code: "713807" }
+            ],
+            "Delivery": [
+                { name: "Express delivery", code: "723776" },
+                { name: "Recycling", code: "111302" }
+            ],
+            "TV": [
+                { name: "TV Wall Mount", code: "824434" },
+                { name: "TV setup", code: "490433" }
+            ],
+            "MDA (Major Domestic Appliances)": [
+                { name: "Laundry install", code: "792753" },
+                { name: "Dishwasher install", code: "055848" },
+                { name: "Door swap", code: "556348" },
+                { name: "Gas install", code: "843080" },
+                { name: "Half Price gas", code: "241582" },
+                { name: "Electric install", code: "958420" },
+                { name: "Half Price Electric Install", code: "035751" },
+                { name: "Dual fuel", code: "044585" },
+                { name: "Half Price Dual Fuel", code: "292911" },
+                { name: "Integrated Dish / Laundry", code: "308754" },
+                { name: "Half Price Integrated Dish / Laundry", code: "044574" }
+            ]
+        };
+
+        /* High-Precision Pure SVG Code 39 Barcode Generator */
+        function generateCode39SVG(code) {
+            const charWidths = {
+                '0': [1,1,1,2,2,1,2,1,1], '1': [2,1,1,1,1,1,1,1,2],
+                '2': [1,1,2,1,1,1,1,1,2], '3': [2,1,2,1,1,1,1,1,1],
+                '4': [1,1,1,1,2,1,1,1,2], '5': [2,1,1,1,2,1,1,1,1],
+                '6': [1,1,2,1,2,1,1,1,1], '7': [1,1,1,1,1,1,2,1,2],
+                '8': [2,1,1,1,1,1,2,1,1], '9': [1,1,2,1,1,1,2,1,1],
+                '*': [1,2,1,1,2,1,1,1,1]
+            };
+
+            const fullCode = '*' + code + '*';
+            let bars = '';
+            let x = 10;
+            const narrow = 2;
+            const wide = 4.5;
+            const height = 45;
+
+            for (let c of fullCode) {
+                const widths = charWidths[c] || charWidths['0'];
+                for (let i = 0; i < 9; i++) {
+                    const w = widths[i] === 2 ? wide : narrow;
+                    const isBar = (i % 2 === 0);
+                    if (isBar) {
+                        bars += `<rect x="${x}" y="0" width="${w}" height="${height}" fill="#000000"/>`;
+                    }
+                    x += w;
+                }
+                x += narrow;
+            }
+
+            return `<svg viewBox="0 0 ${x + 10} ${height}" preserveAspectRatio="none" style="width: 100\%; height: 42px;">${bars}</svg>`;
+        }
+
+        function renderVouchers() {
+            const container = document.getElementById('vouchers-content');
+            container.innerHTML = '';
+
+            for (const [category, vouchers] of Object.entries(serviceVouchersData)) {
+                const catTitle = document.createElement('div');
+                catTitle.className = 'voucher-cat-title';
+                catTitle.textContent = category;
+                container.appendChild(catTitle);
+
+                const grid = document.createElement('div');
+                grid.className = 'voucher-grid';
+
+                vouchers.forEach(v => {
+                    const card = document.createElement('div');
+                    card.className = 'voucher-card';
+
+                    const svgBarcode = generateCode39SVG(v.code);
+
+                    card.innerHTML = `
+                        <div class="voucher-name">${v.name}</div>
+                        <div class="barcode-svg-container">${svgBarcode}</div>
+                        <div class="voucher-code">${v.code}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                container.appendChild(grid);
+            }
+        }
+
+        renderVouchers();
+
         function populateYears(elementId) {
             const select = document.getElementById(elementId);
+            if (!select) return;
             select.innerHTML = '';
             for (let i = 0; i <= 25; i++) {
                 const opt = document.createElement('option');
@@ -1196,61 +870,23 @@
         populateYears('office');
         populateYears('privacyGuard');
 
-        const zaggOptions = {
-            all: [
-                {value: 'none', text: 'None'},
-                {value: 'elite', text: 'Elite'},
-                {value: 'eco', text: 'Extreme'},
-                {value: 'extreme', text: 'Extreme'},
-                {value: 'privacy-matte', text: 'Privacy Matte'},
-                {value: 'matte', text: 'Matte'}
-            ],
-            laptop: [
-                {value: 'none', text: 'None'},
-                {value: 'privacy-matte', text: 'Privacy Matte'}
-            ],
-            tablet: [
-                {value: 'none', text: 'None'},
-                {value: 'elite', text: 'Elite'},
-                {value: 'privacy-matte', text: 'Privacy Matte'}
-            ]
-        };
+        const zaggOptions = [
+            {value: 'none', text: 'None'},
+            {value: 'elite', text: 'Elite'},
+            {value: 'eco', text: 'Extreme'},
+            {value: 'extreme', text: 'Extreme'},
+            {value: 'privacy-matte', text: 'Privacy Matte'},
+            {value: 'matte', text: 'Matte'}
+        ];
 
-        function updateZaggDropdown(device) {
-            const zaggSelect = document.getElementById('zagg');
-            const zaggCard = document.getElementById('zagg-card');
-            
-            if (device === 'tower' || device === 'aio') {
-                zaggCard.style.display = 'none';
-                return;
-            } else {
-                zaggCard.style.display = 'flex';
-            }
-
-            zaggSelect.innerHTML = '';
-            let allowed = zaggOptions.all;
-
-            if (device === 'laptop') {
-                allowed = zaggOptions.laptop;
-            } else if (device === 'tablet') {
-                allowed = zaggOptions.tablet;
-            }
-
-            allowed.forEach(opt => {
+        const zaggSelect = document.getElementById('zagg');
+        if (zaggSelect) {
+            zaggOptions.forEach(opt => {
                 const el = document.createElement('option');
                 el.value = opt.value;
                 el.textContent = opt.text;
                 zaggSelect.appendChild(el);
             });
-        }
-
-        function updateOfficeVisibility(device) {
-            const officeCard = document.getElementById('office-card');
-            if (device === 'mobile') {
-                officeCard.style.display = 'none';
-            } else {
-                officeCard.style.display = 'flex';
-            }
         }
 
         const icons = {
@@ -1259,297 +895,61 @@
             aio: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="10" y="15" width="80" height="55" rx="4" /><path d="M 40,70 L 60,70 L 65,85 L 35,85 Z" /><line x1="25" y1="85" x2="75" y2="85" /></svg>`,
             tower: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="30" y="10" width="40" height="80" rx="3" /><rect x="35" y="20" width="30" height="12" /><rect x="35" y="38" width="30" height="4" /><circle cx="50" cy="70" r="5" /></svg>`,
             mobile: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="30" y="10" width="40" height="80" rx="8" /><circle cx="50" cy="80" r="4" /><line x1="40" y1="18" x2="60" y2="18" /></svg>`,
-            tablet: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="15" y="10" width="70" height="80" rx="6" /><circle cx="50" cy="80" r="4" /></svg>`
+            tablet: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="15" y="10" width="70" height="80" rx="6" /><circle cx="50" cy="80" r="4" /></svg>`,
+            services: `<svg viewBox="0 0 100 100" fill="#ffffff" stroke="#9b51e0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><path d="M45,15 L55,15 L58,25 A30,30 0 0,1 66,30 L76,25 L81,34 L73,42 A30,30 0 0,1 73,50 L81,58 L76,67 L66,62 A30,30 0 0,1 58,67 L55,77 L45,77 L42,67 A30,30 0 0,1 34,62 L24,67 L19,58 L27,50 A30,30 0 0,1 27,42 L19,34 L24,25 L34,30 A30,30 0 0,1 42,25 Z"/><circle cx="50" cy="46" r="10"/></svg>`
         };
-
-        function toggleTradeInGuides() {
-            const deviceSelect = document.getElementById('device');
-            const iphoneTradeInCheck = document.getElementById('iphoneTradeInCheck');
-            const androidTradeInCheck = document.getElementById('androidTradeInCheck');
-            const iosTradeInCheck = document.getElementById('iosTradeInCheck');
-            const iphoneGuidePage = document.getElementById('iphone-guide-page');
-            const androidGuidePage = document.getElementById('android-guide-page');
-            const whatsappBox = document.getElementById('whatsapp-guide-box');
-            
-            const isIphoneChecked = iphoneTradeInCheck && iphoneTradeInCheck.checked;
-            const isIosChecked = iosTradeInCheck && iosTradeInCheck.checked;
-            const isAndroidChecked = androidTradeInCheck && androidTradeInCheck.checked;
-
-            if (deviceSelect.value === 'mobile') {
-                iphoneGuidePage.style.display = isIphoneChecked ? 'flex' : 'none';
-                androidGuidePage.style.display = isAndroidChecked ? 'flex' : 'none';
-                if (whatsappBox) whatsappBox.style.display = 'flex';
-            } else if (deviceSelect.value === 'tablet') {
-                iphoneGuidePage.style.display = isIosChecked ? 'flex' : 'none';
-                androidGuidePage.style.display = 'none';
-                if (whatsappBox) whatsappBox.style.display = 'none';
-            } else {
-                iphoneGuidePage.style.display = 'none';
-                androidGuidePage.style.display = 'none';
-                if (whatsappBox) whatsappBox.style.display = 'flex';
-            }
-        }
 
         function handleDeviceChange() {
             const deviceSelect = document.getElementById('device');
             const iconContainer = document.getElementById('icon-container');
-            const promoBanner = document.getElementById('promo-banner');
-            const imeiGroup = document.getElementById('imei-group');
-            const preorderGroup = document.getElementById('preorder-group');
-            
-            const iphoneTradeInCard = document.getElementById('iphone-trade-in-card');
-            const iphoneTradeInCheck = document.getElementById('iphoneTradeInCheck');
-            const androidTradeInCard = document.getElementById('android-trade-in-card');
-            const androidTradeInCheck = document.getElementById('androidTradeInCheck');
-            const iosTradeInCard = document.getElementById('ios-trade-in-card');
-            const iosTradeInCheck = document.getElementById('iosTradeInCheck');
-            
-            // Second page elements
-            const secondPage = document.getElementById('second-page');
-            const tipsSpace = document.getElementById('tips-space');
-            
             const selectedDevice = deviceSelect.value;
-            
-            iconContainer.innerHTML = icons[selectedDevice];
-            updateZaggDropdown(selectedDevice);
-            updateOfficeVisibility(selectedDevice);
 
-            if (selectedDevice === 'mobile') {
-                imeiGroup.style.display = 'flex';
-                preorderGroup.style.display = 'flex';
-                iphoneTradeInCard.style.display = 'flex';
-                androidTradeInCard.style.display = 'flex';
-                iosTradeInCard.style.display = 'none';
-                iosTradeInCheck.checked = false;
-            } else if (selectedDevice === 'tablet') {
-                imeiGroup.style.display = 'none'; // Changed to hide the IMEI for tablet
-                preorderGroup.style.display = 'none';
-                iphoneTradeInCard.style.display = 'none';
-                iphoneTradeInCheck.checked = false;
-                androidTradeInCard.style.display = 'none';
-                androidTradeInCheck.checked = false;
-                iosTradeInCard.style.display = 'flex';
-            } else {
-                imeiGroup.style.display = 'none';
-                preorderGroup.style.display = 'none';
-                iphoneTradeInCard.style.display = 'none';
-                iphoneTradeInCheck.checked = false;
-                androidTradeInCard.style.display = 'none';
-                androidTradeInCheck.checked = false;
-                iosTradeInCard.style.display = 'none';
-                iosTradeInCheck.checked = false;
-            }
+            const customerFields = document.getElementById('customer-fields-container');
+            const servicesGridWrapper = document.getElementById('services-grid-wrapper');
+            const notesSection = document.getElementById('notes-section');
+            const vouchersContainer = document.getElementById('service-vouchers-container');
+            const secondPage = document.getElementById('second-page');
+            const mainTitle = document.getElementById('page-main-title');
+            const subTitle = document.getElementById('page-sub-title');
 
-            toggleTradeInGuides();
+            iconContainer.innerHTML = icons[selectedDevice] || '';
 
-            const cards = [
-                document.getElementById('antivirus-card'),
-                document.getElementById('office-card'),
-                document.getElementById('privacy-card'),
-                document.getElementById('zagg-card'),
-                document.getElementById('cloud-card'),
-                document.getElementById('vpn-card'),
-                document.getElementById('data-card'),
-                document.getElementById('iphone-trade-in-card'),
-                document.getElementById('android-trade-in-card'),
-                document.getElementById('ios-trade-in-card')
-            ];
-
-            const visibleCards = cards.filter(card => card && card.style.display !== 'none');
-
-            if (['tower', 'aio', 'mobile'].includes(selectedDevice)) {
-                visibleCards.forEach(card => {
-                    card.style.gridColumn = 'span 4';
-                });
-            } else if (['laptop', 'tablet'].includes(selectedDevice)) {
-                if (visibleCards.length === 8 || visibleCards.length === 4) {
-                    visibleCards.forEach(card => {
-                        card.style.gridColumn = 'span 3';
-                    });
-                } else {
-                    visibleCards.forEach((card, idx) => {
-                        if (idx < 4) {
-                            card.style.gridColumn = 'span 3';
-                        } else {
-                            card.style.gridColumn = 'span 4';
-                        }
-                    });
-                }
-            } else {
-                visibleCards.forEach(card => {
-                    card.style.gridColumn = 'span 3';
-                });
-            }
-
-            // Handle First Page Promo Banners
-            if (['laptop', 'aio', 'tower'].includes(selectedDevice)) {
-                promoBanner.innerHTML = `
-                    <p>Internet running slow speak to your advisor about your bill and possible upgrade</p>
-                    <p><strong>Please complete any back ups before coming in for your new device including WhatsApp</strong></p>
-                    <p><strong>Please ensure your current password for Google or Apple to ensure a password reset isn't required and find my device and theft protection is TURNED OFF!!!</strong></p>
-                    <p>Are you over paying for your mobile phone contract please speak to your advisor to see if we can beat the price!!!</p>
-                `;
-                promoBanner.style.display = 'block';
-            } else if (selectedDevice === 'tablet') {
-                promoBanner.innerHTML = `
-                    <p>Internet running slow speak to your advisor about your bill and possible upgrade</p>
-                    <p>Are you over paying for your mobile phone contract please speak to your advisor to see if we can beat the price!!!</p>
-                    <p><strong>Please complete any back ups before coming in for your new device</strong></p>
-                    <p><strong>Please ensure your current password for Google or Apple to ensure a password reset isn't required and find my device and theft protection is TURNED OFF!!!</strong></p>
-                `;
-                promoBanner.style.display = 'block';
-            } else if (selectedDevice === 'mobile') {
-                promoBanner.innerHTML = `
-                    <p>Internet running slow speak to your advisor about your bill and possible upgrade</p>
-                    <p><strong>Please complete any back ups before coming in for your new device including WhatsApp</strong></p>
-                    <p><strong>Please ensure your current password for Google or Apple to ensure a password reset isn't required and find my device and theft protection is TURNED OFF!!!</strong></p>
-                `;
-                promoBanner.style.display = 'block';
-            } else {
-                promoBanner.style.display = 'none';
-            }
-
-            // Handle Second Page Content Based on Device
-            if (selectedDevice === 'none') {
+            if (selectedDevice === 'services') {
+                /* STRICT REQUIREMENTS: Hide EVERYTHING except Device Selection & Barcodes */
+                customerFields.style.display = 'none';
+                servicesGridWrapper.style.display = 'none';
+                notesSection.style.display = 'none';
                 secondPage.style.display = 'none';
+                vouchersContainer.style.display = 'flex';
+
+                mainTitle.textContent = "Service Barcodes";
+                subTitle.textContent = "Store Voucher & Service Code Reference";
             } else {
-                secondPage.style.display = 'flex';
-                let tipsHtml = `<h2 class="tips-title">Helpful Tips</h2>`;
+                /* Show normal setup sheet view */
+                customerFields.style.display = 'block';
+                servicesGridWrapper.style.display = 'block';
+                notesSection.style.display = 'flex';
+                vouchersContainer.style.display = 'none';
 
-                if (['laptop', 'aio', 'tower'].includes(selectedDevice)) {
-                    tipsHtml += `
-                        <div class="tip-item">Please check your passwords are correct and up-to-date before leaving</div>
-                        <div class="tip-item">On your return please bring your mobile phone and bank card information to help with any setup of antivirus</div>
-                        <div class="tip-item">Internet running slow at home or possibly over paying speak to an advisor to help find the best deal for you !!!</div>
-                        <div class="tip-item"><strong>Did you know you can check if your over paying on your mobile phone contract</strong><br><br>Texting the word INFO to 85075 is a free UK mobile service that tells you whether you are still in a minimum-term contract with your mobile provider and if you owe any early termination fees. Speak to one of our advisors today about beating your price !!!!</div>
-                    `;
-                } else if (['mobile', 'tablet'].includes(selectedDevice)) {
-                    const backupText = selectedDevice === 'tablet' 
-                        ? 'Please complete any back ups before coming in for your new device' 
-                        : 'Please complete any back ups before coming in for your new device including WhatsApp';
+                mainTitle.textContent = "Setup Sheet";
+                subTitle.textContent = "Device Configuration & Services";
 
-                    tipsHtml += `
-                        <div class="tip-item">${backupText}</div>
-                        <div class="tip-item">Please ensure your current password for Google or Apple to ensure a password reset isn't required and find my device and theft protection is TURNED OFF!!!</div>
-                        <div class="tip-item">On your return please bring your bank card to help with any setup of antivirus or booking out of your phone</div>
-                        <div class="tip-item">Internet running slow at home or possibly over paying speak to an advisor to help find the best deal for you !!!</div>
-                    `;
-
-                    if (selectedDevice === 'tablet') {
-                        tipsHtml += `
-                            <div class="tip-item"><strong>Did you know you can check if your over paying on your mobile phone contract</strong><br><br>Texting the word INFO to 85075 is a free UK mobile service that tells you whether you are still in a minimum-term contract with your mobile provider and if you owe any early termination fees. Speak to one of our advisors today about beating your price !!!!</div>
-                        `;
-                    }
+                if (selectedDevice === 'none') {
+                    secondPage.style.display = 'none';
+                } else {
+                    secondPage.style.display = 'flex';
                 }
-                
-                // Add the survey section to ALL device types at the end of the tips
-                tipsHtml += `
-                    <div class="tip-item">
-                        Soon you will receive an email asking you to rate our service today, and this is how our survey rates our colleagues:
-                        <div class="survey-gradient-container">
-                            <div class="survey-labels">
-                                <span class="label-poor">Poor</span>
-                                <span class="label-good">Good</span>
-                            </div>
-                            <div class="survey-numbers">
-                                <div>0</div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                tipsSpace.innerHTML = tipsHtml;
             }
         }
-
-        const fields = ['device', 'item', 'productCode', 'customerName', 'colleagueName', 'receiptCur', 'medics', 'email', 'altEmail', 'address', 'dobDay', 'dobMonth', 'dobYear', 'contactNumber', 'password', 'pin', 'imei', 'preorder', 'antivirus', 'office', 'privacyGuard', 'zagg', 'cloudCheck', 'vpnCheck', 'dataCheck', 'iphoneTradeInCheck', 'androidTradeInCheck', 'iosTradeInCheck', 'notes'];
 
         function clearAppData() {
             if (confirm("Are you sure you want to clear all form fields?")) {
-                fields.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) {
-                        if (el.type === 'checkbox') {
-                            el.checked = false;
-                        } else {
-                            el.value = '';
-                        }
-                    }
-                });
+                document.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach(el => el.value = '');
+                document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
+                document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
                 handleDeviceChange();
             }
         }
-
-        /* Date of Birth auto-advancing focus */
-        const dobDay = document.getElementById('dobDay');
-        const dobMonth = document.getElementById('dobMonth');
-        const dobYear = document.getElementById('dobYear');
-
-        if (dobDay && dobMonth && dobYear) {
-            dobDay.addEventListener('input', () => {
-                if (dobDay.value.length === 2) dobMonth.focus();
-            });
-            dobMonth.addEventListener('input', () => {
-                if (dobMonth.value.length === 2) dobYear.focus();
-            });
-            dobMonth.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && dobMonth.value === '') dobDay.focus();
-            });
-            dobYear.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && dobYear.value === '') dobMonth.focus();
-            });
-        }
-
-        /* Preparation before print: hides placeholders & unselected default values */
-        function prepareForPrint() {
-            // Strip placeholders from empty text fields so browser print engines don't render them
-            document.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach(el => {
-                if (!el.value || el.value.trim() === '') {
-                    el.dataset.tempPlaceholder = el.placeholder || '';
-                    el.placeholder = '';
-                    el.classList.add('print-transparent-text');
-                }
-            });
-
-            // Make unselected/default select options invisible when printed
-            document.querySelectorAll('select').forEach(el => {
-                if (el.value === 'none' || el.value === '' || el.value === '0') {
-                    el.dataset.tempColor = el.style.color || '';
-                    el.classList.add('print-transparent-text');
-                }
-            });
-        }
-
-        /* Restoration after print: restores placeholders & original styles */
-        function restoreAfterPrint() {
-            document.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach(el => {
-                if (el.dataset.tempPlaceholder !== undefined) {
-                    el.placeholder = el.dataset.tempPlaceholder;
-                    delete el.dataset.tempPlaceholder;
-                }
-                el.classList.remove('print-transparent-text');
-            });
-
-            document.querySelectorAll('select').forEach(el => {
-                if (el.dataset.tempColor !== undefined) {
-                    delete el.dataset.tempColor;
-                }
-                el.classList.remove('print-transparent-text');
-            });
-        }
-
-        function triggerPrint() {
-            window.print();
-        }
-
-        window.addEventListener('beforeprint', prepareForPrint);
-        window.addEventListener('afterprint', restoreAfterPrint);
-
-        window.addEventListener('pageshow', (event) => {
-            if (event.persisted) {
-                clearAppData();
-            }
-        });
 
         handleDeviceChange();
     </script>
