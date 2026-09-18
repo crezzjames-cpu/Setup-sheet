@@ -111,11 +111,11 @@
             letter-spacing: 1px;
         }
 
-        .device-selector-container {
+        .header-colleague-container {
             display: flex;
             flex-direction: column;
             gap: 5px;
-            max-width: 300px;
+            max-width: 260px;
             width: 100%;
         }
 
@@ -407,40 +407,16 @@
         /* Second Page Styles */
         .second-page {
             display: none;
-            flex-direction: row;
             padding: 0 !important;
             margin-top: 20px;
+            overflow: hidden;
         }
 
-        .receipt-space {
-            width: 90mm;
-            min-height: 100%;
-            border-right: 2px dashed var(--main-purple);
-            background-color: #faf5ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            box-sizing: border-box;
-        }
-
-        .receipt-text {
-            transform: rotate(-90deg);
-            color: var(--main-purple);
-            font-weight: bold;
-            font-size: 24px;
-            letter-spacing: 2px;
-            opacity: 0.3;
-            white-space: nowrap;
-        }
-
-        .tips-space {
-            flex: 1;
-            padding: 20mm 15mm;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            box-sizing: border-box;
+        .second-page iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 297mm;
+            border: none;
         }
 
         /* Third Page (Trade-In Guide) Styles */
@@ -504,6 +480,9 @@
                 margin: 0;
                 page-break-after: always;
             }
+            .a4-sheet.second-page {
+                padding: 0 !important;
+            }
             .a4-sheet:last-child {
                 page-break-after: auto;
             }
@@ -541,71 +520,71 @@
                 <p id="page-sub-title" style="color: var(--main-purple); margin: 3px 0 0 0; font-weight: bold; font-size: 13px;">Device Configuration & Services</p>
             </div>
             
-            <div class="device-selector-container">
-                <label for="device">Device Type</label>
-                <select id="device" onchange="handleDeviceChange()">
-                    <option value="none">-- Select --</option>
-                    <option value="laptop">Laptop</option>
-                    <option value="aio">All in one</option>
-                    <option value="tower">Tower</option>
-                    <option value="mobile">Mobile phone</option>
-                    <option value="tablet">Tablet</option>
-                    <option value="services">Services</option>
-                </select>
+            <div class="header-colleague-container" id="header-colleague-container">
+                <label for="colleagueName">You were served by</label>
+                <input type="text" id="colleagueName" placeholder="First Name" autocomplete="off">
             </div>
 
             <div class="device-icon-container" id="icon-container"></div>
         </header>
 
-        <!-- Customer & Device Details Form (Hidden when Services selected) -->
+        <!-- Customer & Device Details Form -->
         <div id="customer-fields-container">
             <form class="form-grid" id="setup-form" autocomplete="off">
-                <div class="form-group">
-                    <label for="colleagueName">You were served by</label>
-                    <input type="text" id="colleagueName" placeholder="First Name" autocomplete="off">
+                <div class="form-group" id="device-selector-group">
+                    <label for="device">Device Type</label>
+                    <select id="device" onchange="handleDeviceChange()">
+                        <option value="none">-- Select --</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="aio">All in one</option>
+                        <option value="tower">Tower</option>
+                        <option value="mobile">Mobile phone</option>
+                        <option value="tablet">Tablet</option>
+                        <option value="services">Services</option>
+                    </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="customerName">Customer Name</label>
                     <input type="text" id="customerName" placeholder="Enter full name" autocomplete="off">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="item">Item</label>
                     <input type="text" id="item" placeholder="Enter item" autocomplete="off">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="productCode">Product Code</label>
                     <input type="text" id="productCode" placeholder="e.g. LAP123" autocomplete="off">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="receiptCur">Receipt / CUR</label>
                     <input type="text" id="receiptCur" placeholder="Enter Receipt / CUR" autocomplete="off">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="medics">Medics</label>
                     <input type="text" id="medics" placeholder="Enter Medics" autocomplete="off">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="contactNumber">Best Contact Number</label>
                     <input type="text" id="contactNumber" placeholder="Enter phone number" autocomplete="off">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" placeholder="Enter email address" autocomplete="email">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="altEmail">Alternative Email Address</label>
                     <input type="email" id="altEmail" placeholder="Enter alternative email address" autocomplete="email">
                 </div>
 
-                <div class="form-group dob-group">
+                <div class="form-group dob-group customer-only-field">
                     <label>Date of Birth <span style="font-weight: normal; font-size: 0.9em;">(for account creation)</span></label>
                     <div class="dob-container">
                         <input type="text" id="dobDay" placeholder="DD" maxlength="2" autocomplete="off">
@@ -616,27 +595,27 @@
                     </div>
                 </div>
 
-                <div class="form-group full-width">
+                <div class="form-group full-width customer-only-field">
                     <label for="address">Full Address</label>
                     <textarea id="address" rows="4" placeholder="Enter customer's full address" autocomplete="off"></textarea>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="password">Password</label>
                     <input type="text" id="password" placeholder="Account Password" autocomplete="new-password">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group customer-only-field">
                     <label for="pin">Pin</label>
                     <input type="text" id="pin" placeholder="Device PIN" autocomplete="new-password">
                 </div>
 
-                <div class="form-group" id="imei-group" style="display: none;">
+                <div class="form-group customer-only-field" id="imei-group" style="display: none;">
                     <label for="imei">IMEI number (Trade in)</label>
                     <input type="text" id="imei" placeholder="Enter IMEI number" autocomplete="off">
                 </div>
 
-                <div class="form-group" id="preorder-group" style="display: none;">
+                <div class="form-group customer-only-field" id="preorder-group" style="display: none;">
                     <label for="preorder">Pre-order</label>
                     <select id="preorder">
                         <option value="">-- Select --</option>
@@ -727,12 +706,9 @@
         </div>
     </div>
 
-    <!-- Second Page: Helpful Tips & Receipt -->
+    <!-- Second Page: PDF Display Sheet -->
     <div class="a4-sheet second-page" id="second-page">
-        <div class="receipt-space">
-            <span class="receipt-text">ATTACH RECEIPT HERE</span>
-        </div>
-        <div class="tips-space" id="tips-space"></div>
+        <iframe id="second-page-pdf" src=""></iframe>
     </div>
 
     <!-- Third Page: Trade-In Preparation Guide Sheet -->
@@ -783,20 +759,26 @@
         };
 
         function generateCode39SVG(code) {
+            // Standard Code 39 Width Maps (1 = Narrow, 2 = Wide)
             const charWidths = {
-                '0': [1,1,1,2,2,1,2,1,1], '1': [2,1,1,1,1,1,1,1,2],
-                '2': [1,1,2,1,1,1,1,1,2], '3': [2,1,2,1,1,1,1,1,1],
-                '4': [1,1,1,1,2,1,1,1,2], '5': [2,1,1,1,2,1,1,1,1],
-                '6': [1,1,2,1,2,1,1,1,1], '7': [1,1,1,1,1,1,2,1,2],
-                '8': [2,1,1,1,1,1,2,1,1], '9': [1,1,2,1,1,1,2,1,1],
-                '*': [1,2,1,1,2,1,1,1,1]
+                '0': [1,1,1,1,2,2,2,1,1],
+                '1': [2,1,1,1,1,2,1,1,2],
+                '2': [1,1,2,1,1,2,1,1,2],
+                '3': [2,1,2,1,1,2,1,1,1],
+                '4': [1,1,1,1,2,2,1,1,2],
+                '5': [2,1,1,1,2,2,1,1,1],
+                '6': [1,1,2,1,2,2,1,1,1],
+                '7': [1,1,1,1,1,2,2,1,2],
+                '8': [2,1,1,1,1,2,2,1,1],
+                '9': [1,1,2,1,1,2,2,1,1],
+                '*': [1,2,1,1,2,1,2,1,1]
             };
 
             const fullCode = '*' + code + '*';
             let bars = '';
             let x = 10;
             const narrow = 2;
-            const wide = 4.5;
+            const wide = 5;
             const height = 45;
 
             for (let c of fullCode) {
@@ -805,14 +787,7 @@
                     const w = widths[i] === 2 ? wide : narrow;
                     const isBar = (i % 2 === 0);
                     if (isBar) {
-                        bars += `<rect x="${x}" y="0" width="${w}" height="${height}" fill="#000000"/>`;
-                    }
-                    x += w;
-                }
-                x += narrow;
-            }
-
-            return `<svg viewBox="0 0 ${x + 10} ${height}" preserveAspectRatio="none" style="width: 100\%; height: 42px;">${bars}</svg>`;
+                        bars += `<rect x="${x}" y="0" width="${w}" height="${height}" fill="#000000"/>`;                     }                     x += w;                 }                 x += narrow;             }              return `<svg viewBox="0 0 ${x + 10} ${height}" preserveAspectRatio="none" style="width: 100\%; height: 45px;">${bars}</svg>`;
         }
 
         function renderVouchers() {
@@ -1000,10 +975,13 @@
             const selectedDevice = deviceSelect.value;
 
             const customerFields = document.getElementById('customer-fields-container');
+            const customerOnlyFields = document.querySelectorAll('.customer-only-field');
+            const headerColleague = document.getElementById('header-colleague-container');
             const servicesGridWrapper = document.getElementById('services-grid-wrapper');
             const notesSection = document.getElementById('notes-section');
             const vouchersContainer = document.getElementById('service-vouchers-container');
             const secondPage = document.getElementById('second-page');
+            const secondPdf = document.getElementById('second-page-pdf');
             const mainTitle = document.getElementById('page-main-title');
             const subTitle = document.getElementById('page-sub-title');
 
@@ -1017,29 +995,38 @@
 
             iconContainer.innerHTML = icons[selectedDevice] || '';
 
+            // Handle Second Page PDF Logic
+            if (selectedDevice === 'mobile') {
+                secondPage.style.display = 'flex';
+                if (secondPdf) secondPdf.src = '1.pdf';
+            } else if (['laptop', 'aio', 'tower', 'tablet'].includes(selectedDevice)) {
+                secondPage.style.display = 'flex';
+                if (secondPdf) secondPdf.src = '2.pdf';
+            } else {
+                secondPage.style.display = 'none';
+                if (secondPdf) secondPdf.src = '';
+            }
+
             if (selectedDevice === 'services') {
-                customerFields.style.display = 'none';
+                if (headerColleague) headerColleague.style.display = 'none';
+                customerFields.style.display = 'block';
+                customerOnlyFields.forEach(el => el.style.display = 'none');
                 servicesGridWrapper.style.display = 'none';
                 notesSection.style.display = 'none';
-                secondPage.style.display = 'none';
                 vouchersContainer.style.display = 'flex';
 
                 mainTitle.textContent = "Service Barcodes";
                 subTitle.textContent = "Store Voucher & Service Code Reference";
             } else {
+                if (headerColleague) headerColleague.style.display = 'flex';
                 customerFields.style.display = 'block';
+                customerOnlyFields.forEach(el => el.style.display = 'flex');
                 servicesGridWrapper.style.display = 'block';
                 notesSection.style.display = 'flex';
                 vouchersContainer.style.display = 'none';
 
                 mainTitle.textContent = "Setup Sheet";
                 subTitle.textContent = "Device Configuration & Services";
-
-                if (selectedDevice === 'none') {
-                    secondPage.style.display = 'none';
-                } else {
-                    secondPage.style.display = 'flex';
-                }
 
                 if (officeCard) officeCard.style.display = 'flex';
                 if (privacyCard) privacyCard.style.display = 'flex';
